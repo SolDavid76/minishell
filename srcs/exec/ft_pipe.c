@@ -180,7 +180,7 @@ int	ft_redirection_aux(t_pipe *pipeline, char **cmd, int i)
 	else if (ft_strcmp(cmd[i], ">>"))
 		fd = open(cmd[i + 1], O_CREAT + O_WRONLY + O_APPEND, 0666);
 	else if (ft_strcmp(cmd[i], "<"))
-		fd = open(cmd[i + 1], O_RDONLY, 0666);
+		fd = open(cmd[i + 1], O_RDONLY);
 	if (fd == -1)
 	{
 		close(pipeline->fd[0]);
@@ -346,26 +346,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
-char	*ft_strjoin_char(char *str, char c)
-{
-	char	*res;
-	int		i;
-	int		j;
-
-	res = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	if (!res)
-		exit(1);
-	i = 0;
-	j = 0;
-	while (str[i])
-		res[j++] = str[i++];
-	res[j++] = c;
-	res[j] = '\0';
-	if (str)
-		free(str);
-	return (res);
-}
-
 char	*ft_strdup(char *str)
 {
 	char	*res;
@@ -381,35 +361,60 @@ char	*ft_strdup(char *str)
 	return (res);
 }
 
-t_list	*here_doc_open(t_list *lst, t_list *input)
+int ft_strncmp(char *s1, char *s2, int n)
 {
-	char	*res;
+	int	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i] && i < n - 1)
+		i++;
+	return (s1[i] == s2[i]);
+}
+
+char	*ft_env_sub(char **envp, char *key)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], key, ft_strlen(key)))
+			return (envp[i] + ft_strlen(key) + 1);
+		i++;
+	}
+	return (NULL);
+}
+
+t_list	*here_doc_open(t_list *docs, t_list *input, char *eof)
+{
+	char	*str;
 	int		fd;
 	int		i;
 
 	i = 0;
 	fd = -1;
-	res = NULL;
+	str = NULL;
 	while (fd == -1)
 	{
-		if (res)
-			free(res);
-		res = ft_strjoin(ft_strdup(".here_doc"), ft_itoa(i++));
-		fd = open(res, O_CREAT + O_EXCL + O_RDWR, 0666);
+		if (str)
+			free(str);
+		str = ft_strjoin(ft_strdup(".here_doc"), ft_itoa(i++));
+		fd = open(str, O_CREAT + O_EXCL + O_WRONLY, 0666);
 	}
-	ft_lstadd_back(&lst, ft_lstnew(res));
-	while (input)
+	ft_lstadd_back(&docs, ft_lstnew(str));
+	while (input && !ft_strcmp(input->content, eof))
 	{
-		write(fd, input->content, ft_strlen(input->content));
-		if (input->content)
+		str = ft_env_sub(input->content)
+		write(fd, str, ft_strlen(str));
+		if (str)
 			write(fd, "\n", 1);
 		input = input->next;
 	}
 	close(fd);
-	return (lst);
+	return (docs);
 }
 
-t_list	*here_doc_aux(t_list *lst, char **cmd, int x)
+t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 {
 	t_list	*input;
 	int		i;
@@ -431,33 +436,33 @@ t_list	*here_doc_aux(t_list *lst, char **cmd, int x)
 		write(2, cmd[x + 1], ft_strlen(cmd[x + 1]));
 		write(2, "')\n", 3);
 	}
-	lst = here_doc_open(lst, input);
+	docs = here_doc_open(docs, input, cmd[x + 1]);
 	ft_lst_free(input);
 	cmd[x] = "<";
-	cmd[x + 1] = ft_lstlast(lst)->content;
-	return (lst);
+	cmd[x + 1] = ft_lstlast(docs)->content;
+	return (docs);
 }
 
 t_list	*here_doc(char ***cmds)
 {
-	t_list	*lst;
+	t_list	*docs;
 	int		i;
 	int		j;
 
 	i = 0;
-	lst = NULL;
+	docs = NULL;
 	while (cmds[i])
 	{
 		j = 0;
 		while (cmds[i][j])
 		{
 			if (ft_strcmp(cmds[i][j], "<<"))
-				lst = here_doc_aux(lst, cmds[i], j);
+				docs = here_doc_aux(docs, cmds[i], j);
 			j++;
 		}
 		i++;
 	}
-	return (lst);
+	return (docs);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -473,9 +478,14 @@ int	main(int ac, char **av, char **envp)
 	char	**cmds[6] = {ls, cat, wc, NULL};
 
 	t_list *lst = here_doc(cmds);
+	t_list *tmp = lst;
 	ft_pipe(cmds, envp);
+	while (tmp)
+	{
+		unlink(tmp->content);
+		tmp = tmp->next;
+	}
 	ft_lst_free(lst);
-	unlink(lst->content);
 	(void)ac;
 	(void)av;
 	(void)cat;

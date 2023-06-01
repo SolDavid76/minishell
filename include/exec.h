@@ -9,15 +9,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-//useless now
-typedef struct s_dict
-{
-	char			*key;
-	char			*content;
-	struct s_dict	*prev;
-	struct s_dict	*next;
-}					t_dict;
-
 typedef struct s_list
 {
 	char			*content;
@@ -26,7 +17,7 @@ typedef struct s_list
 
 typedef struct s_shell
 {
-	t_dict	*env;
+	char	**envp;
 	char	***cmds;
 }			t_shell;
 
