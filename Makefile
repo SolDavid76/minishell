@@ -1,47 +1,67 @@
-SRCS_DIR	= srcs/
+SRCS_DIR	= 	srcs_parsing/
 
-SRC			= builtins.c \
-			  dict.c \
-			  dict_aux.c \
-			  main.c \
-			  utils.c \
+SRC		=		acces.c\
+				list.c\
+				parameter_expansion.c\
+				lexer_utils.c\
+				remove_quote.c\
+				parsing.c\
+				split_pipe.c\
+				split_redirect.c\
+				pipe_utils.c\
+				pipe_utils2.c\
+				pipe_utils3.c\
+				redi_utils.c\
+				redi_utils2.c\
+				expansion_utils.c\
+				expansion_utils2.c\
+				acces_split.c\
+				substiution_utils.c\
+				substitution_utils2.c\
+				list2.c\
 
-SRCS		= $(addprefix $(SRCS_DIR), $(SRC))
 
-OBJS_DIR	= objs/
 
-OBJ			= ${SRC:.c=.o}
 
-OBJS		= $(addprefix $(OBJS_DIR), $(OBJ))
+SRCS =$(addprefix $(SRCS_DIR), $(SRC))
 
-NAME		= minishell
 
-CC			= gcc
+OBJS_DIR	=	obj/
 
-CFLAGS		= -Wall -Wextra -Werror
+OBJ 		= $(SRC:.c=.o)
 
-INCS		= -I ./includes/
+OBJS 		= $(addprefix $(OBJS_DIR), $(OBJ))
+
+NAME 		= 	minishell
+
+CC			= 	gcc
+
+FLAGS		= 	-Wall -Wextra -Werror -g
+
+INCS 		= 	-I ./include/
 
 READLINE	= -L /usr/local/lib -I /usr/local/include -lreadline
 
-all:		${OBJS_DIR} ${NAME}
+RM = rm -f
 
-${OBJS_DIR}:
-			mkdir ${OBJS_DIR}
+all : ${OBJS_DIR} ${NAME}
 
-${OBJS_DIR}%.o: ${SRCS_DIR}%.c
-			${CC} ${CFLAGS} -c $< -o $@ ${INCS}
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
+	${CC} ${FLAGS} -c $< -o $@ ${INCS}
 
-${NAME}:	${OBJS}
-			${CC} ${CFLAGS} ${OBJS} ${READLINE} -o ${NAME}
+$(OBJS_DIR):
+	mkdir $(OBJS_DIR)
 
-clean:
-			rm -rf ${OBJS_DIR}
 
-fclean:		clean
-			rm -f ${NAME}
-			rm -f a.out
+${NAME}: ${OBJS}
+		${CC} ${FLAGS} ${OBJS} -o $(NAME) ${READLINE}
 
-re:			fclean all
+clean : 
+	rm -rf ${OBJS_DIR}
 
-.PHONY:		all clean fclean re
+fclean : clean
+	${RM} ${NAME}
+
+re :	fclean all
+
+.PHONY : all clean fclean re             
