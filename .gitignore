@@ -1,4 +1,9 @@
-# Prerequisites
+.idea
+.vscode
+minishell
+*.pdf
+
+#Prerequisites
 *.d
 
 # Object files
