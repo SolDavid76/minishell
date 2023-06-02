@@ -18,7 +18,7 @@ t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 	{
 		i = 0;
 		str = input->content;
-		while (str[i])
+		while (str && str[i])
 		{
 			if (str[i] == '$')
 			{
@@ -73,7 +73,7 @@ t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 	}
 	if (!ft_lstlast(input)->content)
 	{
-		write(2, "warning : here-document at line ", 33);
+		write(2, "\nwarning : here-document at line ", 34);
 		ft_putnbr_fd(2, i);
 		write(2, " delimited by end-of-file (wanted `", 36);
 		write(2, cmd[x + 1], ft_strlen(cmd[x + 1]));
