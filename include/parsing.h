@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:31:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/02 10:27:19 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:26:38 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ typedef struct s_list
 	char			**content2;
 	struct s_list	*next;
 }	t_list;
+
+typedef struct s_dict
+{
+	char			*key;
+	char			*content;
+	struct s_dict	*next;
+}	t_dict;
 
 void	print_list(t_list **lst);
 void	print_command(t_list **lst);
@@ -100,5 +107,11 @@ char	*command_sub(char *str, char **envp);
 
 char	***big_join(t_list *lst);
 void	print_big(char ***big);
+
+void	ft_dictadd_back(t_dict **lst, t_dict *new);
+t_dict	*ft_dictnew(char *content, char *key, int len);
+void	print_dict(t_dict **lst);
+int		ft_dictsize(t_dict *lst);
+
 
 #endif
