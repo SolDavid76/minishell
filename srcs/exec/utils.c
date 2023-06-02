@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "exec.h"
 
 int	ft_strlen(char *str)
 {
@@ -12,16 +12,16 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_strcpy(char *src, char *dst)
+int	ft_tablen(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (src[i])
-	{
-		dst[i] = src[i];
+	if (!tab)
+		return (0);
+	while (tab[i])
 		i++;
-	}
+	return (i);
 }
 
 int	ft_strcmp(char *s1, char *s2)
@@ -29,85 +29,49 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
+	if (!s1 || !s2)
+		return (0);
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] == s2[i]);
 }
 
-char	*ft_strdup(char *str, int size)
+char	*ft_strdup(char *str)
 {
 	char	*res;
 	int		i;
 
-	res = malloc(sizeof(char) * (size + 1));
+	res = malloc(sizeof(char) * (ft_strlen(str) + 1));
 	if (!res)
-		ft_main_exit(get_shell(), 1);
-	i = 0;
-	while (str[i] && size)
-	{
+		exit(1);
+	i = -1;
+	while (str[++i])
 		res[i] = str[i];
-		size--;
-		i++;
-	}
 	res[i] = '\0';
 	return (res);
 }
 
-t_dict	*dicting(char **env)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	t_dict	*res;
-	char	*key;
-	char	*content;
+	char	*res;
 	int		i;
 	int		j;
 
-	i = 0;
-	res = NULL;
-	while (env[i])
-	{
-		j = 0;
-		while (env[i][j] != '=')
-			j++;
-		key = ft_strdup(env[i], j);
-		content = ft_strdup(env[i] + j + 1, ft_strlen(env[i] + j + 1));
-		ft_dictadd_back(&res, ft_dictnew(key, content));
-		i++;
-	}
-	return (res);
-}
-
-void	*free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-		free(map[i++]);
-	free(map);
-	return (NULL);
-}
-
-char	**maping(t_dict *dict)
-{
-	char	**res;
-	int		i;
-
-	res = malloc(sizeof(char *) * (ft_dictsize(dict) + 1));
+	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
 	if (!res)
-		return (NULL);
+		exit(1);
 	i = 0;
-	while (dict)
-	{
-		res[i] = malloc(ft_strlen(dict->key) + ft_strlen(dict->content) + 2);
-		if (!res)
-			return (free_map(res));
-		ft_strcpy(dict->key, res[i]);
-		res[i][ft_strlen(dict->key)] = '=';
-		ft_strcpy(dict->content, res[i] + (ft_strlen(dict->key) + 1));
-		res[i][ft_strlen(dict->key) + ft_strlen(dict->content) + 1] = '\0';
-		dict = dict->next;
-		i++;
-	}
-	res[i] = NULL;
+	j = 0;
+	if (s1)
+		while (s1[i])
+			res[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		res[j++] = s2[i++];
+	res[j] = '\0';
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
 	return (res);
 }
