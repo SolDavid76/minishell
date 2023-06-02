@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:44:53 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/01 14:13:03 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:03:46 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,17 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		else
 			*lst = new;
 	}
+}
+
+int	ft_lstsize(t_list *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }

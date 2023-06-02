@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:31:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/01 14:12:47 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:27:19 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		is_empty(t_list *list);
 void	add_tail(t_list *list, t_list *new);
 void	ft_lstclear(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
 
 int		is_token(char c);
 int		is_redirection(char c);
@@ -96,5 +97,8 @@ void	*free_split_s(char **split, int i);
 
 char	*check_file_exist(char *command);
 char	*command_sub(char *str, char **envp);
+
+char	***big_join(t_list *lst);
+void	print_big(char ***big);
 
 #endif

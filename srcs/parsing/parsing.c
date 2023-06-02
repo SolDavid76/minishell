@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:01:50 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/01 16:18:51 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/02 10:25:59 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_list	*parsing(t_list *bob, char *tmp, char **envp)
 	{
 		bob = substitution(&bob, envp);
 		print_command(&bob);
+		printf("list size %d\n", ft_lstsize(bob));
 	}
 	return (bob);
 }
@@ -39,6 +40,7 @@ int	main(int ac, char **av, char **envp)
 {
 	t_list	*bob;
 	char	*tmp;
+	char	***big;
 
 	while (1)
 	{
@@ -46,13 +48,17 @@ int	main(int ac, char **av, char **envp)
 		if (tmp)
 		{
 			bob = parsing(bob, tmp, envp);
+			big = big_join(bob);
+			print_big(big);
 			free(tmp);
 			ft_lstclear(bob);
+			free(big);
 		}
 		else
 			return (0);
 		(void)ac;
 		(void)av;
+		(void)big;
 	}	
 	return (0);
 }

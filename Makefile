@@ -1,4 +1,4 @@
-SRCS_DIR	= 	srcs_parsing/
+SRCS_DIR	= 	srcs/parsing/
 
 SRC		=		acces.c\
 				list.c\
@@ -19,6 +19,7 @@ SRC		=		acces.c\
 				substiution_utils.c\
 				substitution_utils2.c\
 				list2.c\
+				before_exec.c\
 
 
 
