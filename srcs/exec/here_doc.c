@@ -1,4 +1,4 @@
-#include "exec.h"
+#include "minishell.h"
 
 int	is_in_variable(char c)
 {

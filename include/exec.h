@@ -7,20 +7,6 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-typedef struct s_dict
-{
-	char			*key;
-	char			*content;
-	struct s_list	*next;
-}					t_dict;
-
-typedef struct s_shell
-{
-	t_dict	*dict;
-	char	**envp;
-	char	***cmds;
-}			t_shell;
-
 typedef struct s_pipe
 {
 	int	prev_pipe;
@@ -78,7 +64,7 @@ void	echo(char **cmd);
 
 /* shell.c */
 void	ft_main_exit(int code);
-t_shell	*get_shell(void);
+// t_shell	*get_shell(void);
 char	**ft_envdup(char **envp);
 char	*ft_env_sub(char *key);
 

@@ -1,4 +1,4 @@
-#include "exec.h"
+#include "minishell.h"
 
 int	ft_nbrcmd(char ***cmds)
 {

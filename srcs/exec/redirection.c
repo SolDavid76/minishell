@@ -1,4 +1,4 @@
-#include "exec.h"
+#include "minishell.h"
 
 void	ft_delete_redirection(char **cmd, int x)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "minishell.h"
 
 t_list	*parsing_aux(t_list *bob, char *tmp, char **envp)
 {

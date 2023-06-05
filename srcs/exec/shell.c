@@ -1,4 +1,4 @@
-#include "exec.h"
+#include "minishell.h"
 
 char	*ft_env_sub(char *key)
 {

@@ -98,9 +98,6 @@ void	*free_split_s(char **split, int i);
 char	*check_file_exist(char *command);
 char	*command_sub(char *str, char **envp);
 
-char	***big_join(t_list *lst);
-void	print_big(char ***big);
-
 void	ft_dictadd_back(t_dict **lst, t_dict *new);
 t_dict	*ft_dictnew(char *content, char *key, int len);
 void	print_dict(t_dict **lst);
