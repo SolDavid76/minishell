@@ -50,7 +50,6 @@ t_listp	*parsing(char **envp)
 			bob = parsing_aux(bob, tmp, envp);
 			return (bob);
 		}
-			
 		else
 			return (0);
 	}

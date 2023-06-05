@@ -14,7 +14,7 @@ t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 	char	*str;
 	int		i;
 
-	while (input && !ft_strcmp(input->content, eof))
+	while (input && ft_strcmp(input->content, eof))
 	{
 		i = 0;
 		str = input->content;
@@ -65,7 +65,7 @@ t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 	i = 0;
 	input = NULL;
 	ft_lstadd_back(&input, ft_lstnew(readline(">")));
-	while (!ft_strcmp(ft_lstlast(input)->content, cmd[x + 1])
+	while (ft_strcmp(ft_lstlast(input)->content, cmd[x + 1])
 		&& ft_lstlast(input)->content)
 	{
 		ft_lstadd_back(&input, ft_lstnew(readline(">")));
@@ -99,7 +99,7 @@ t_list	*here_doc(char ***cmds)
 		j = 0;
 		while (cmds[i][j])
 		{
-			if (ft_strcmp(cmds[i][j], "<<"))
+			if (!ft_strcmp(cmds[i][j], "<<"))
 				docs = here_doc_aux(docs, cmds[i], j);
 			j++;
 		}

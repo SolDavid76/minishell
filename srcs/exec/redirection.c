@@ -18,11 +18,11 @@ int	ft_redirection_aux(t_pipe *pipeline, char **cmd, int i)
 	int	fd;
 
 	fd = 0;
-	if (ft_strcmp(cmd[i], ">"))
+	if (!ft_strcmp(cmd[i], ">"))
 		fd = open(cmd[i + 1], O_CREAT + O_WRONLY, 0666);
-	else if (ft_strcmp(cmd[i], ">>"))
+	else if (!ft_strcmp(cmd[i], ">>"))
 		fd = open(cmd[i + 1], O_CREAT + O_WRONLY + O_APPEND, 0666);
-	else if (ft_strcmp(cmd[i], "<"))
+	else if (!ft_strcmp(cmd[i], "<"))
 		fd = open(cmd[i + 1], O_RDONLY);
 	if (fd == -1)
 	{
@@ -45,9 +45,9 @@ void	ft_redirection(t_pipe *pipeline, char **cmd)
 	while (cmd[i])
 	{
 		fd = ft_redirection_aux(pipeline, cmd, i);
-		if (ft_strcmp(cmd[i], ">") || ft_strcmp(cmd[i], ">>"))
+		if (!ft_strcmp(cmd[i], ">") || !ft_strcmp(cmd[i], ">>"))
 			dup2(fd, 1);
-		else if (ft_strcmp(cmd[i], "<"))
+		else if (!ft_strcmp(cmd[i], "<"))
 			dup2(fd, 0);
 		if (fd)
 		{

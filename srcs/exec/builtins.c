@@ -2,39 +2,39 @@
 
 int	is_buildin(char *cmd)
 {
-	if (ft_strcmp(cmd, "echo"))
+	if (!ft_strcmp(cmd, "echo"))
 		return (1);
-	if (ft_strcmp(cmd, "cd"))
+	if (!ft_strcmp(cmd, "cd"))
 		return (1);
-	if (ft_strcmp(cmd, "pwd"))
+	if (!ft_strcmp(cmd, "pwd"))
 		return (1);
-	if (ft_strcmp(cmd, "export"))
+	if (!ft_strcmp(cmd, "export"))
 		return (1);
-	if (ft_strcmp(cmd, "unset"))
+	if (!ft_strcmp(cmd, "unset"))
 		return (1);
-	if (ft_strcmp(cmd, "env"))
+	if (!ft_strcmp(cmd, "env"))
 		return (1);
-	if (ft_strcmp(cmd, "exit"))
+	if (!ft_strcmp(cmd, "exit"))
 		return (1);
 	return (0);
 }
 
-// else if (ft_strcmp(cmd[0], "cd"))
+// else if (!ft_strcmp(cmd[0], "cd"))
 // 	return (1);
-// else if (ft_strcmp(cmd[0], "pwd"))
+// else if (!ft_strcmp(cmd[0], "pwd"))
 // 	return (1);
-// else if (ft_strcmp(cmd[0], "export"))
+// else if (!ft_strcmp(cmd[0], "export"))
 // 	return (1);
-// else if (ft_strcmp(cmd[0], "unset"))
+// else if (!ft_strcmp(cmd[0], "unset"))
 // 	return (1);
-// else if (ft_strcmp(cmd[0], "env"))
+// else if (!ft_strcmp(cmd[0], "env"))
 // 	return (1);
-// else if (ft_strcmp(cmd[0], "exit"))
+// else if (!ft_strcmp(cmd[0], "exit"))
 // 	return (1);
 
 void	exec_buildin(char **cmd)
 {
-	if (ft_strcmp(cmd[0], "echo"))
+	if (!ft_strcmp(cmd[0], "echo"))
 		echo(cmd + 1);
 	exit(0);
 }
@@ -44,7 +44,7 @@ void	echo(char **cmd)
 	int	option;
 	int	i;
 
-	option = ft_strcmp(cmd[0], "-n");
+	option = !ft_strcmp(cmd[0], "-n");
 	i = option;
 	while (cmd[i])
 	{
