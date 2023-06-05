@@ -36,20 +36,15 @@ t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp)
 	return (bob);
 }
 
-t_listp	*parsing(char **envp)
+t_listp	*parsing(char *tmp, char **envp)
 {
 	t_listp	*bob;
-	char	*tmp;
 
 	bob = NULL;
 	while (1)
 	{
-		tmp = readline("Enter text: ");
 		if (tmp)
-		{
-			bob = parsing_aux(bob, tmp, envp);
-			return (bob);
-		}
+			return (parsing_aux(bob, tmp, envp));
 		else
 			return (0);
 	}

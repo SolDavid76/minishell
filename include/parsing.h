@@ -104,6 +104,6 @@ void	print_dict(t_dict **lst);
 int		ft_dictsize(t_dict *lst);
 
 t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp);
-t_listp	*parsing(char **envp);
+t_listp	*parsing(char *tmp, char **envp);
 
 #endif

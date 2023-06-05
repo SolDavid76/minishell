@@ -63,9 +63,9 @@ void	echo(char **cmd);
 // void	ft_exit(char **cmd);
 
 /* shell.c */
-void	ft_main_exit(int code);
+// void	ft_main_exit(int code);
 // t_shell	*get_shell(void);
-char	**ft_envdup(char **envp);
+// char	**ft_envdup(char **envp);
 char	*ft_env_sub(char *key);
 
 #endif

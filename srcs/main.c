@@ -8,7 +8,6 @@ void	ft_main_exit(int code)
 	if (shell)
 	{
 		free_tab(shell->envp);
-		free_tab_tab(shell->cmds);
 		free(shell);
 	}
 	exit(code);
@@ -64,8 +63,19 @@ char	***big_join(t_listp *lst)
 
 int main(int ac, char **av, char **envp)
 {
+	char	*input;
+
 	get_shell();
+	get_shell()->cmds = NULL;
 	get_shell()->envp = ft_envdup(envp);
-	get_shell()->cmds = big_join(parsing(get_shell()->envp));
-	ft_pipe(get_shell()->cmds, get_shell()->envp);
+	while (42)
+	{
+		input = readline(">");
+		if (input == NULL)
+			ft_main_exit(0);
+		get_shell()->cmds = big_join(parsing(input, get_shell()->envp));
+		ft_pipe(get_shell()->cmds, get_shell()->envp);
+		free_tab_tab(get_shell()->cmds);
+	}
+	ft_main_exit(0);
 }
