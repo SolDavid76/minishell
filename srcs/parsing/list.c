@@ -12,12 +12,12 @@
 
 #include "minishell.h"
 
-t_list	*ft_lstnew(char *content, int len)
+t_listp	*ft_lstnewp(char *content, int len)
 {
-	t_list	*new;
+	t_listp	*new;
 	char	*dup;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_listp));
 	if (!new)
 		return (NULL);
 	dup = ft_strndup(content, len);
@@ -28,7 +28,7 @@ t_list	*ft_lstnew(char *content, int len)
 	return (new);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_listp	*ft_lstlastp(t_listp *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -37,15 +37,15 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_backp(t_listp **lst, t_listp *new)
 {
-	t_list	*last;
+	t_listp	*last;
 
 	if (lst)
 	{
 		if (*lst)
 		{
-			last = ft_lstlast(*lst);
+			last = ft_lstlastp(*lst);
 			last->next = new;
 		}
 		else
@@ -53,7 +53,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 }
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsizep(t_listp *lst)
 {
 	int	i;
 

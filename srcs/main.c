@@ -41,13 +41,13 @@ char	**ft_envdup(char **envp)
 	return (res);
 }
 
-char	***big_join(t_list *lst)
+char	***big_join(t_listp *lst)
 {
 	char	***res;
 	int		size;
 	int		i;
 
-	size = ft_lstsize(lst);
+	size = ft_lstsizep(lst);
 	res = (char ***)malloc(sizeof(char **) * (size + 1));
 	i = 0;
 	if (!res)

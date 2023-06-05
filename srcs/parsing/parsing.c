@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_list	*parsing_aux(t_list *bob, char *tmp, char **envp)
+t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp)
 {
 	add_history(tmp);
 	printf("readline : %s\n", tmp);
@@ -31,21 +31,26 @@ t_list	*parsing_aux(t_list *bob, char *tmp, char **envp)
 	{
 		bob = substitution(&bob, envp);
 		print_command(&bob);
-		printf("list size %d\n", ft_lstsize(bob));
+		printf("list size %d\n", ft_lstsizep(bob));
 	}
 	return (bob);
 }
 
-t_list	*parsing(char **envp)
+t_listp	*parsing(char **envp)
 {
-	t_list	*bob;
+	t_listp	*bob;
 	char	*tmp;
 
+	bob = NULL;
 	while (1)
 	{
 		tmp = readline("Enter text: ");
 		if (tmp)
-			return (parsing_aux(bob, tmp, envp));
+		{
+			bob = parsing_aux(bob, tmp, envp);
+			return (bob);
+		}
+			
 		else
 			return (0);
 	}

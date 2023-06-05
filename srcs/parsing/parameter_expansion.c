@@ -66,9 +66,9 @@ char	*new_expand(char *content, char **envp)
 	return (res);
 }
 
-t_list	*expansion(t_list **token, char **envp)
+t_listp	*expansion(t_listp **token, char **envp)
 {
-	t_list	*tmp;
+	t_listp	*tmp;
 	int		i;
 
 	i = 0;

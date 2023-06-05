@@ -18,11 +18,11 @@ int	print_error(char *str)
 	return (0);
 }
 
-t_list	*split_pipe(char	*str)
+t_listp	*split_pipe(char	*str)
 {
 	char	**split;
 	int		i;
-	t_list	*lst;
+	t_listp	*lst;
 
 	if (end_pipe(str) == 1 || start_pipe(str) == 1 || \
 	test_multi(str) == 1 || check_triple(str) == 1)
@@ -32,7 +32,7 @@ t_list	*split_pipe(char	*str)
 	lst = NULL;
 	while (split[i])
 	{
-		ft_lstadd_back(&lst, ft_lstnew(split[i], ft_strlen(split[i])));
+		ft_lstadd_backp(&lst, ft_lstnewp(split[i], ft_strlen(split[i])));
 		i++;
 	}
 	free_split_p(split);
@@ -68,9 +68,9 @@ char	*ft_strtrim(char *s1, char *set)
 	return (tab);
 }
 
-t_list	*split_redirection(t_list **lst)
+t_listp	*split_redirection(t_listp **lst)
 {
-	t_list	*tmp;
+	t_listp	*tmp;
 	int		flag;
 
 	flag = 0;
@@ -87,14 +87,14 @@ t_list	*split_redirection(t_list **lst)
 	}
 	if (flag == 1)
 	{
-		ft_lstclear(*lst);
+		ft_lstclearp(*lst);
 		return (NULL);
 	}
 	print_command(lst);
 	return (*lst);
 }
 
-t_list	*lexer2(char *readline, t_list *lst)
+t_listp	*lexer2(char *readline, t_listp *lst)
 {
 	lst = split_pipe(readline);
 	if (lst != NULL)

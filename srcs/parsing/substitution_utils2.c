@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int	is_buildin(char *cmd)
+int	is_buildinp(char *cmd)
 {
 	if (ft_strcmp(cmd, "echo") == 0)
 		return (1);
@@ -37,7 +37,7 @@ char	*check_path(char **path_split, char *str)
 	char	*tmp;
 
 	i = 0;
-	if (is_buildin(str) != 1)
+	if (is_buildinp(str) != 1)
 	{
 		while (path_split[i])
 		{

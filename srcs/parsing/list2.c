@@ -26,9 +26,9 @@ static void	*free_split(char **strs)
 	return (NULL);
 }
 
-void	ft_lstclear(t_list	*lst)
+void	ft_lstclearp(t_listp	*lst)
 {
-	t_list	*tmp;
+	t_listp	*tmp;
 
 	while (lst)
 	{
@@ -40,9 +40,9 @@ void	ft_lstclear(t_list	*lst)
 	}
 }
 
-void	print_list(t_list **lst)
+void	print_list(t_listp **lst)
 {
-	t_list	*tmp;
+	t_listp	*tmp;
 	int		i;
 
 	tmp = *lst;
@@ -56,9 +56,9 @@ void	print_list(t_list **lst)
 	printf("\n");
 }
 
-void	print_command(t_list **lst)
+void	print_command(t_listp **lst)
 {
-	t_list	*tmp;
+	t_listp	*tmp;
 	int		i;
 	int		j;
 

@@ -30,9 +30,9 @@ int	ft_strslen(char **str)
 	return (i);
 }
 
-t_list	*substitution(t_list **token, char **envp)
+t_listp	*substitution(t_listp **token, char **envp)
 {
-	t_list	*tmp;
+	t_listp	*tmp;
 	int		i;
 	int		flag;
 

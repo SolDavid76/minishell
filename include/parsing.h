@@ -13,12 +13,12 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-typedef struct s_list
+typedef struct s_listp
 {
 	char			*content;
 	char			**content2;
-	struct s_list	*next;
-}	t_list;
+	struct s_listp	*next;
+}	t_listp;
 
 typedef struct s_dict
 {
@@ -27,15 +27,15 @@ typedef struct s_dict
 	struct s_dict	*next;
 }	t_dict;
 
-void	print_list(t_list **lst);
-void	print_command(t_list **lst);
+void	print_list(t_listp **lst);
+void	print_command(t_listp **lst);
 
 int		is_token(char c);
 char	*ft_strchr(char *s, int c);
-t_list	*lexer(char *line);
-t_list	*lexer2(char *readline, t_list *lst);
+t_listp	*lexer(char *line);
+t_listp	*lexer2(char *readline, t_listp *lst);
 
-t_list	*expansion(t_list **token, char **envp);
+t_listp	*expansion(t_listp **token, char **envp);
 
 int		ft_strlen(char *str);
 int		ft_strslen(char **str);
@@ -44,20 +44,20 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin_char(char *str, char c);
 char	*ft_strjoin(char *s1, char *s2);
 
-t_list	*substitution(t_list **token, char **envp);
+t_listp	*substitution(t_listp **token, char **envp);
 
-t_list	*remove_quote(t_list **token);
+t_listp	*remove_quote(t_listp **token);
 
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strndup(char *s, size_t size);
 
-t_list	*init_list(t_list *list);
-t_list	*ft_lstnew(char *content, int len);
-int		is_empty(t_list *list);
-void	add_tail(t_list *list, t_list *new);
-void	ft_lstclear(t_list *lst);
-void	ft_lstadd_back(t_list **lst, t_list *new);
-int		ft_lstsize(t_list *lst);
+t_listp	*init_list(t_listp *list);
+t_listp	*ft_lstnewp(char *content, int len);
+int		is_empty(t_listp *list);
+void	add_tailp(t_listp *list, t_listp *new);
+void	ft_lstclearp(t_listp *lst);
+void	ft_lstadd_backp(t_listp **lst, t_listp *new);
+int		ft_lstsizep(t_listp *lst);
 
 int		is_token(char c);
 int		is_redirection(char c);
@@ -103,7 +103,7 @@ t_dict	*ft_dictnew(char *content, char *key, int len);
 void	print_dict(t_dict **lst);
 int		ft_dictsize(t_dict *lst);
 
-t_list	*parsing_aux(t_list *bob, char *tmp, char **envp);
-t_list	*parsing(char **envp);
+t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp);
+t_listp	*parsing(char **envp);
 
 #endif

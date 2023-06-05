@@ -66,9 +66,9 @@ char	*remove_quote_aux(char *tmp)
 	return (res);
 }
 
-t_list	*remove_quote(t_list **token)
+t_listp	*remove_quote(t_listp **token)
 {
-	t_list	*tmp;
+	t_listp	*tmp;
 	int		i;
 
 	i = 0;

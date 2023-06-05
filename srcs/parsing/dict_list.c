@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dict_list.c                                        :+:      :+:    :+:   */
+/*   dict_listp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -16,7 +16,7 @@ t_dict	*ft_dictnew(char *content, char *key, int len)
 {
 	t_dict	*new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_listp));
 	if (!new)
 		return (NULL);
 	new->content = content;
