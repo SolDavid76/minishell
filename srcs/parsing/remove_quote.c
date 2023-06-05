@@ -12,17 +12,17 @@
 
 #include "minishell.h"
 
-int	ft_strlen(char *str)
-{
-	int	i;
+// int	ft_strlen(char *str)
+// {
+// 	int	i;
 
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	if (!str)
+// 		return (0);
+// 	while (str[i])
+// 		i++;
+// 	return (i);
+// }
 
 int	find_end(char *str, char c)
 {
