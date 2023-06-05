@@ -83,6 +83,6 @@ t_listp	*expansion(t_listp **token, char **envp)
 		}
 		tmp = tmp->next;
 	}
-	printf("after expansion\n");
+	// printf("after expansion\n");
 	return (*token);
 }

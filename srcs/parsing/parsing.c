@@ -15,23 +15,23 @@
 t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp)
 {
 	add_history(tmp);
-	printf("readline : %s\n", tmp);
+	// printf("readline : %s\n", tmp);
 	bob = lexer2(tmp, bob);
 	if (bob != NULL)
 	{
 		bob = expansion(&bob, envp);
-		print_command(&bob);
+		// print_command(&bob);
 	}
 	if (bob != NULL)
 	{
 		bob = remove_quote(&bob);
-		print_command(&bob);
+		// print_command(&bob);
 	}
 	if (bob != NULL)
 	{
 		bob = substitution(&bob, envp);
-		print_command(&bob);
-		printf("list size %d\n", ft_lstsizep(bob));
+		// print_command(&bob);
+		// printf("list size %d\n", ft_lstsizep(bob));
 	}
 	return (bob);
 }

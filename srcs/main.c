@@ -64,6 +64,7 @@ char	***big_join(t_listp *lst)
 int main(int ac, char **av, char **envp)
 {
 	char	*input;
+	t_listp	*bob;
 
 	get_shell();
 	get_shell()->cmds = NULL;
@@ -73,9 +74,13 @@ int main(int ac, char **av, char **envp)
 		input = readline(">");
 		if (input == NULL)
 			ft_main_exit(0);
-		get_shell()->cmds = big_join(parsing(input, get_shell()->envp));
+		bob = parsing(input, get_shell()->envp);
+		get_shell()->cmds = big_join(bob);
 		ft_pipe(get_shell()->cmds, get_shell()->envp);
 		free_tab_tab(get_shell()->cmds);
+		free(input);
+		ft_lstclearp(bob);
+
 	}
 	ft_main_exit(0);
 }

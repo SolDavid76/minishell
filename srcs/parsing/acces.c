@@ -54,6 +54,6 @@ t_listp	*substitution(t_listp **token, char **envp)
 		}
 		tmp = tmp->next;
 	}
-	printf("after substitution\n");
+	// printf("after substitution\n");
 	return (*token);
 }

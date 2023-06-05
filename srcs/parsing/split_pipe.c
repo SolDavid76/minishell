@@ -36,7 +36,7 @@ t_listp	*split_pipe(char	*str)
 		i++;
 	}
 	free_split_p(split);
-	print_list(&lst);
+	// print_list(&lst);
 	return (lst);
 }
 
@@ -90,7 +90,7 @@ t_listp	*split_redirection(t_listp **lst)
 		ft_lstclearp(*lst);
 		return (NULL);
 	}
-	print_command(lst);
+	// print_command(lst);
 	return (*lst);
 }
 

@@ -83,6 +83,6 @@ t_listp	*remove_quote(t_listp **token)
 		}
 		tmp = tmp->next;
 	}
-	printf("after remove quote\n");
+	// printf("after remove quote\n");
 	return (*token);
 }

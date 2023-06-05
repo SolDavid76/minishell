@@ -34,7 +34,7 @@ void	ft_lstclearp(t_listp	*lst)
 	{
 		tmp = lst->next;
 		free(lst->content);
-		free_split(lst->content2);
+		// free_split(lst->content2);
 		free(lst);
 		lst = tmp;
 	}
