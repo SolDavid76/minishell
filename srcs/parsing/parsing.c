@@ -12,7 +12,7 @@
 
 #include "parsing.h"
 
-t_list	*parsing(t_list *bob, char *tmp, char **envp)
+t_list	*parsing_aux(t_list *bob, char *tmp, char **envp)
 {
 	add_history(tmp);
 	printf("readline : %s\n", tmp);
@@ -36,29 +36,18 @@ t_list	*parsing(t_list *bob, char *tmp, char **envp)
 	return (bob);
 }
 
-int	main(int ac, char **av, char **envp)
+t_list	*parsing(char **envp)
 {
 	t_list	*bob;
 	char	*tmp;
-	char	***big;
 
 	while (1)
 	{
 		tmp = readline("Enter text: ");
 		if (tmp)
-		{
-			bob = parsing(bob, tmp, envp);
-			big = big_join(bob);
-			print_big(big);
-			free(tmp);
-			ft_lstclear(bob);
-			free(big);
-		}
+			return (parsing_aux(bob, tmp, envp));
 		else
 			return (0);
-		(void)ac;
-		(void)av;
-		(void)big;
-	}	
+	}
 	return (0);
 }

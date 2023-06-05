@@ -13,13 +13,6 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
 typedef struct s_list
 {
 	char			*content;
@@ -113,5 +106,7 @@ t_dict	*ft_dictnew(char *content, char *key, int len);
 void	print_dict(t_dict **lst);
 int		ft_dictsize(t_dict *lst);
 
+t_list	*parsing_aux(t_list *bob, char *tmp, char **envp);
+t_list	*parsing(char **envp);
 
 #endif

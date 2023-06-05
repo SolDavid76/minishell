@@ -1,6 +1,6 @@
 #include "exec.h"
 
-int	is_valid_variable(char c)
+int	is_in_variable(char c)
 {
 	if ((('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
 			|| ('0' <= c && c <= '9') || c == '_'))
@@ -24,7 +24,7 @@ t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 			{
 				tmp = ft_env_sub(str + 1 + i++);
 				write(fd, tmp, ft_strlen(tmp));
-				while (str[i] && is_valid_variable(str[i]))
+				while (str[i] && is_in_variable(str[i]))
 					i++;
 			}
 			else
