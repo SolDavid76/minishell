@@ -82,5 +82,7 @@ int main(int ac, char **av, char **envp)
 		ft_lstclearp(bob);
 
 	}
+	(void)ac;
+	(void)av;
 	ft_main_exit(0);
 }

@@ -12,19 +12,19 @@
 
 #include "minishell.h"
 
-static void	*free_split(char **strs)
-{
-	int	i;
+// static void	*free_split(char **strs)
+// {
+// 	int	i;
 
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-	return (NULL);
-}
+// 	i = 0;
+// 	while (strs[i])
+// 	{
+// 		free(strs[i]);
+// 		i++;
+// 	}
+// 	free(strs);
+// 	return (NULL);
+// }
 
 void	ft_lstclearp(t_listp	*lst)
 {

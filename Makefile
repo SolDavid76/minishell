@@ -19,17 +19,34 @@ SRC		=		acces.c\
 				substiution_utils.c\
 				substitution_utils2.c\
 				list2.c\
-				before_exec.c\
+
+SRCS_EX_DIR		= srcs/exec/
+
+SRC_EX	=		builtins.c\
+				free.c\
+				ft_itoa.c\
+				ft_pipe.c\
+				here_doc.c\
+				lst.c\
+				redirection.c\
+				shell.c\
+
+SRCS_UTI_DIR	=	srcs/
+
+SRC_UTI			=	main.c\
+					utils.c\
 
 
-
-
-SRCS =$(addprefix $(SRCS_DIR), $(SRC))
-
+SRCS =$(addprefix $(SRCS_DIR), $(SRC))\
+	$(addprefix $(SRCS_EX_DIR), $(SRC_EX))\
+	$(addprefix $(SRCS_UTI_DIR), $(SRC_UTI))\
 
 OBJS_DIR	=	obj/
 
-OBJ 		= $(SRC:.c=.o)
+OBJ 		= $(SRC:.c=.o)\
+				$(SRC_EX:.c=.o)\
+				$(SRC_UTI:.c=.o)\
+
 
 OBJS 		= $(addprefix $(OBJS_DIR), $(OBJ))
 
@@ -45,10 +62,18 @@ READLINE	= -L /usr/local/lib -I /usr/local/include -lreadline
 
 RM = rm -f
 
+
 all : ${OBJS_DIR} ${NAME}
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	${CC} ${FLAGS} -c $< -o $@ ${INCS}
+
+$(OBJS_DIR)%.o: $(SRCS_EX_DIR)%.c
+	$(CC) $(FLAGS) -c $< -o $@ $(INCS)
+
+$(OBJS_DIR)%.o: $(SRCS_UTI_DIR)%.c
+	$(CC) $(FLAGS) -c $< -o $@ $(INCS)
+
 
 $(OBJS_DIR):
 	mkdir $(OBJS_DIR)
