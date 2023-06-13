@@ -41,7 +41,7 @@ SRCS =$(addprefix $(SRCS_DIR), $(SRC))\
 	$(addprefix $(SRCS_EX_DIR), $(SRC_EX))\
 	$(addprefix $(SRCS_UTI_DIR), $(SRC_UTI))\
 
-OBJS_DIR	=	obj/
+OBJS_DIR	=	objs/
 
 OBJ 		= $(SRC:.c=.o)\
 				$(SRC_EX:.c=.o)\
@@ -90,4 +90,4 @@ fclean : clean
 
 re :	fclean all
 
-.PHONY : all clean fclean re             
+.PHONY : all clean fclean re

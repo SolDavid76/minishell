@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/13 09:59:57 by djanusz           #+#    #+#             */
+/*   Updated: 2023/06/13 09:59:57 by djanusz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_main_exit(int code)
@@ -63,8 +75,8 @@ char	***big_join(t_listp *lst)
 
 int main(int ac, char **av, char **envp)
 {
-	char	*input;
 	t_listp	*bob;
+	char	*input;
 
 	get_shell();
 	get_shell()->cmds = NULL;

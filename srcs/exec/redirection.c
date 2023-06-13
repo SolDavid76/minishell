@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/13 10:23:46 by djanusz           #+#    #+#             */
+/*   Updated: 2023/06/13 10:23:47 by djanusz          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	ft_delete_redirection(char **cmd, int x)
@@ -5,8 +17,8 @@ void	ft_delete_redirection(char **cmd, int x)
 	int		i;
 
 	i = x + 2;
-	// free(cmd[x]);
-	// free(cmd[x + 1]);
+	free(cmd[x]);
+	free(cmd[x + 1]);
 	while (cmd[i])
 		cmd[x++] = cmd[i++];
 	cmd[i - 1] = NULL;
