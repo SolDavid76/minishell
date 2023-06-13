@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 10:23:49 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 14:57:23 by djanusz          ###   ########.fr       */
+/*   Created: 2023/06/13 10:52:44 by djanusz           #+#    #+#             */
+/*   Updated: 2023/06/13 18:39:48 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,36 @@
 
 extern t_shell	*g_shell;
 
-int	is_in_variable(char c)
-{
-	if ((('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
-			|| ('0' <= c && c <= '9') || c == '_'))
-		return (1);
-	return (0);
-}
-
-char	*ft_env_sub(char *key, char **envp)
+void	print_cmds(char ***cmds)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (envp[i])
+	fprintf(stderr, "cmds = ");
+	while (cmds[i])
 	{
 		j = 0;
-		while (key[j] == envp[i][j] && is_valid_variable(key[j]))
+		while (cmds[i][j])
+		{
+			fprintf(stderr, "%s ", cmds[i][j]);
 			j++;
-		if (!is_valid_variable(key[j]) && envp[i][j] == '=')
-			return (envp[i] + j + 1);
+		}
 		i++;
 	}
-	return (NULL);
+	fprintf(stderr, "\n");
 }
+
+void	ft_exec(char ***cmds, char **envp)
+{
+	if (ft_cmdslen(cmds) == 1 && is_buildin(cmds[0][0]))
+		g_shell->exit_value = exec_buildin(cmds[0], 0);
+	else
+	{
+		g_shell->exit_value = ft_pipe(cmds, envp);
+	}
+}
+// pid = fork();
+// if (pid == 0)
+// 	here_doc(cmds);
+// waitpid(pid, 0, 0);

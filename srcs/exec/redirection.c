@@ -6,11 +6,13 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 10:23:47 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/13 14:57:27 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_shell	*g_shell;
 
 void	ft_delete_redirection(char **cmd, int x)
 {

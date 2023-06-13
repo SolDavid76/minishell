@@ -30,6 +30,7 @@ SRC_EX	=		builtins.c\
 				lst.c\
 				redirection.c\
 				shell.c\
+				ft_exec.c\
 
 SRCS_UTI_DIR	=	srcs/
 

@@ -6,11 +6,13 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 10:23:02 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/13 17:40:36 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_shell	*g_shell;
 
 int	is_buildin(char *cmd)
 {
@@ -31,24 +33,13 @@ int	is_buildin(char *cmd)
 	return (0);
 }
 
-// else if (!ft_strcmp(cmd[0], "cd"))
-// 	return (1);
-// else if (!ft_strcmp(cmd[0], "pwd"))
-// 	return (1);
-// else if (!ft_strcmp(cmd[0], "export"))
-// 	return (1);
-// else if (!ft_strcmp(cmd[0], "unset"))
-// 	return (1);
-// else if (!ft_strcmp(cmd[0], "env"))
-// 	return (1);
-// else if (!ft_strcmp(cmd[0], "exit"))
-// 	return (1);
-
-void	exec_buildin(char **cmd)
+int	exec_buildin(char **cmd, int mod)
 {
 	if (!ft_strcmp(cmd[0], "echo"))
 		echo(cmd + 1);
-	exit(0);
+	if (mod)
+		exit(g_shell->exit_value);
+	return (0);
 }
 
 void	echo(char **cmd)

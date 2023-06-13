@@ -12,29 +12,36 @@
 
 #include "minishell.h"
 
+t_shell	*g_shell = NULL;
+
+//ne pas reset g_shell->exit_value car 
+//si on en a besoin dans la commande l'info est detruite
+void	ft_shell_init(char **envp)
+{
+	if (g_shell)
+	{
+		g_shell->cmds = free_tab_tab(g_shell->cmds);
+	}
+	else
+	{
+		g_shell = malloc(sizeof(t_shell));
+		g_shell->dict = NULL;
+		g_shell->envp = ft_envdup(envp);
+		g_shell->cmds = NULL;
+	}
+}
+
 void	ft_main_exit(int code)
 {
 	t_shell	*shell;
 
-	shell = get_shell();
+	shell = g_shell;
 	if (shell)
 	{
 		free_tab(shell->envp);
 		free(shell);
 	}
 	exit(code);
-}
-
-t_shell	*get_shell(void)
-{
-	static t_shell	*shell = NULL;
-
-	if (shell)
-		return (shell);
-	shell = malloc(sizeof(t_shell));
-	if (!shell)
-		exit(1);
-	return (shell);
 }
 
 char	**ft_envdup(char **envp)
@@ -73,28 +80,25 @@ char	***big_join(t_listp *lst)
 	return (res);
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
 	t_listp	*bob;
 	char	*input;
 
-	get_shell();
-	get_shell()->cmds = NULL;
-	get_shell()->envp = ft_envdup(envp);
 	while (42)
 	{
-		input = readline(">");
-		if (input == NULL)
-			ft_main_exit(0);
-		bob = parsing(input, get_shell()->envp);
-		get_shell()->cmds = big_join(bob);
-		ft_pipe(get_shell()->cmds, get_shell()->envp);
-		free_tab_tab(get_shell()->cmds);
+		ft_shell_init(envp);
+		input = readline("un joli prompt > ");
+		bob = parsing(input, g_shell->envp);
 		free(input);
+		if (!bob)
+			continue ;
+		g_shell->cmds = big_join(bob);
+		ft_exec(g_shell->cmds, g_shell->envp);
 		ft_lstclearp(bob);
-
 	}
 	(void)ac;
 	(void)av;
 	ft_main_exit(0);
 }
+// fprintf(stderr, "$? = %d\n", g_shell->exit_value);

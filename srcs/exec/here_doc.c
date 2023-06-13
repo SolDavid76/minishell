@@ -6,19 +6,13 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:41 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 10:23:42 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/13 14:56:36 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_in_variable(char c)
-{
-	if ((('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
-			|| ('0' <= c && c <= '9') || c == '_'))
-		return (1);
-	return (0);
-}
+extern t_shell	*g_shell;
 
 t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 {
@@ -34,7 +28,7 @@ t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 		{
 			if (str[i] == '$')
 			{
-				tmp = ft_env_sub(str + 1 + i++);
+				tmp = ft_env_sub(str + 1 + i++, g_shell->envp);
 				write(fd, tmp, ft_strlen(tmp));
 				while (str[i] && is_in_variable(str[i]))
 					i++;
