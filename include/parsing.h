@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:31:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/13 16:35:07 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 11:07:57 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ char	**realoc_split(char **s);
 char	**realoc_split2(char **s);
 int		check_redirection_end(char **split);
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strjoin_char(char *str, char c);
 char	*ft_strjoin(char *s1, char *s2);
 int		is_alpha(char c);

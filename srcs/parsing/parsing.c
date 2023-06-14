@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:01:50 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/02 10:25:59 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/13 18:46:54 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_listp	*parsing(char *tmp, char **envp)
 	t_listp	*bob;
 
 	bob = NULL;
+	if (tmp == NULL)
+		ft_main_exit(0);
 	while (1)
 	{
 		if (tmp)

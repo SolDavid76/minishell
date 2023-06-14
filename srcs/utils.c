@@ -12,6 +12,8 @@
 
 #include "minishell.h"
 
+extern t_shell	*g_shell;
+
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -60,7 +62,6 @@ char	*ft_strdup(char *str)
 	res[i] = '\0';
 	return (res);
 }
-
 
 char	*ft_strjoin(char *s1, char *s2)
 {

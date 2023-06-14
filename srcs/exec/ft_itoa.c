@@ -6,11 +6,13 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:34 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 10:23:35 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/13 14:57:34 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_shell	*g_shell;
 
 void	ft_putchar_fd(int fd, char c)
 {
