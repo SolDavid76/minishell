@@ -6,11 +6,13 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:03:01 by ennollet          #+#    #+#             */
-/*   Updated: 2023/05/31 10:08:45 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:43:40 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_shell	*g_shell;
 
 char	*assign_variable(char *envp, int i)
 {
@@ -42,6 +44,11 @@ char	*check_variable(char *str, char **envp)
 
 	i = 0;
 	tmp = NULL;
+	if (str[i] == '?')
+	{
+		tmp = ft_itoa(g_shell->exit_value);
+		return (tmp);
+	}
 	if (!is_alpha(str[i]))
 		return (NULL);
 	while (is_valid_variable(str[i]))
@@ -66,7 +73,11 @@ int	need_expand(char *str)
 	while (str[i])
 	{
 		if (str[i] == '$')
-			return (1);
+		{
+			if (str[i + 1] && str[i + 1] == '?')
+				return (2);
+			return (1);		
+		}
 		i++;
 	}
 	return (0);

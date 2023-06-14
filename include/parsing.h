@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:31:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/13 17:17:36 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:34:00 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,25 @@ char	*check_file_exist(char *command);
 char	*command_sub(char *str, char **envp);
 
 void	ft_dictadd_back(t_dict **lst, t_dict *new);
-t_dict	*ft_dictnew(char *content, char *key, int len);
+t_dict	*ft_dictnew(char *content, char *key);
 void	print_dict(t_dict **lst);
 int		ft_dictsize(t_dict *lst);
+void	ft_dictclear(t_dict	*lst);
+
 
 t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp);
 t_listp	*parsing(char *tmp, char **envp);
+
+t_dict	*ft_unset(char *var, t_dict *dict);
+t_dict	*add_dict(t_dict *dict, char *key, char *content);
+void	export_without_arg(t_dict *dict);
+
+char	*get_key(char *str);
+char	*get_content(char *str);
+
+
+
+
+
 
 #endif

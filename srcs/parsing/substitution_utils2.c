@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 12:50:09 by ennollet          #+#    #+#             */
-/*   Updated: 2023/05/31 14:58:37 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:00:26 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*check_path(char **path_split, char *str)
 	char	*tmp;
 
 	i = 0;
+	if (!path_split)
+		return (NULL);
 	if (is_buildinp(str) != 1)
 	{
 		while (path_split[i])
@@ -73,6 +75,8 @@ char	*command_sub(char *str, char **envp)
 	char	*res;
 
 	split = get_path_line(envp);
+	if (split == NULL)
+		return (str);
 	tmp = str;
 	res = check_path(split, tmp);
 	if (str != res)
