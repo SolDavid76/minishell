@@ -19,11 +19,14 @@ void	ft_shell_init(char **envp)
 	if (g_shell)
 	{
 		g_shell->cmds = free_tab_tab(g_shell->cmds);
+		here_doc_remove(g_shell->here_docs);
+		g_shell->here_docs = ft_lst_free(g_shell->here_docs);
 	}
 	else
 	{
 		g_shell = malloc(sizeof(t_shell));
 		g_shell->envp = ft_envdup(envp);
+		g_shell->here_docs = NULL;
 		g_shell->cmds = NULL;
 	}
 	errno = 0;
@@ -33,6 +36,8 @@ void	ft_main_exit(int code)
 {
 	if (g_shell)
 	{
+		here_doc_remove(g_shell->here_docs);
+		ft_lst_free(g_shell->here_docs);
 		free_tab_tab(g_shell->cmds);
 		free_tab(g_shell->envp);
 		free(g_shell);
@@ -69,7 +74,7 @@ char	***big_join(t_listp *lst)
 	while (i < size)
 	{
 		res[i] = lst->content2;
-		lst = lst->next ;
+		lst = lst->next;
 		i++;
 	}
 	res[i] = 0;
@@ -87,7 +92,7 @@ int	main(int ac, char **av, char **envp)
 	g_shell->exit_value = 0;
 	while (42)
 	{
-		fprintf(stderr, "$? = %d\n", g_shell->exit_value); // debug
+		fprintf(stderr, "$? = %d\n", g_shell->exit_value); //debug
 		input = readline("un joli prompt > ");
 		lstp = parsing(input, g_shell->envp);
 		free(input);
@@ -98,5 +103,4 @@ int	main(int ac, char **av, char **envp)
 		ft_exec(g_shell->cmds, g_shell->envp);
 		ft_shell_init(envp);
 	}
-	ft_main_exit(0);
 }

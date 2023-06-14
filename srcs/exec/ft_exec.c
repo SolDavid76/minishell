@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:52:44 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/14 15:44:24 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/14 17:26:46 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	print_cmds(char ***cmds)
 
 void	ft_exec(char ***cmds, char **envp)
 {
-	here_doc(cmds);
+	g_shell->here_docs = here_doc(cmds);
 	if (ft_cmdslen(cmds) == 1 && is_buildin(cmds[0][0]))
 		exec_buildin(cmds[0], 0);
 	else

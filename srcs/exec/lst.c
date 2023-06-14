@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 14:57:30 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/14 17:55:01 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 }
 
-void	ft_lst_free(t_list	*lst)
+void	*ft_lst_free(t_list	*lst)
 {
 	t_list	*tmp;
 
@@ -77,4 +77,5 @@ void	ft_lst_free(t_list	*lst)
 		free(lst);
 		lst = tmp;
 	}
+	return (NULL);
 }
