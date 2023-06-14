@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 18:42:25 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/14 15:37:06 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	ft_lst_free(t_list	*lst);
 int		ft_cmdslen(char ***cmds);
 void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp);
 void	ft_pipe_parent(t_pipe *pipeline, char **cmd);
-int		ft_pipe(char ***cmds, char **envp);
+void	ft_pipe(char ***cmds, char **envp);
 
 /* redirection.c */
 void	ft_delete_redirection(char **cmd, int x);
-int		ft_redirection_aux(t_pipe *pipeline, char **cmd, int i);
-void	ft_redirection(t_pipe *pipeline, char **cmd);
+int		ft_redirection_aux(char **cmd, int i);
+void	ft_redirection(char **cmd);
 
 /* here_doc.c */
 t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd);
@@ -64,7 +64,7 @@ void	*free_tab_tab(char ***ptr);
 
 /* builtins.c */
 int		is_buildin(char *cmd);
-int		exec_buildin(char **cmd, int mod);
+void		exec_buildin(char **cmd, int mod);
 void	echo(char **cmd);
 // void	cd(char **cmd);
 // void	pwd(char **cmd);

@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 17:40:36 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/14 15:35:38 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int	is_buildin(char *cmd)
 	return (0);
 }
 
-int	exec_buildin(char **cmd, int mod)
+void	exec_buildin(char **cmd, int mod)
 {
+	ft_redirection(cmd);
 	if (!ft_strcmp(cmd[0], "echo"))
 		echo(cmd + 1);
 	if (mod)
-		exit(g_shell->exit_value);
-	return (0);
+		ft_main_exit(g_shell->exit_value);
 }
 
 void	echo(char **cmd)

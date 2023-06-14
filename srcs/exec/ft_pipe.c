@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:37 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 18:38:44 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/14 15:44:02 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,26 @@ void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp)
 	}
 	if (pipeline->i != pipeline->nbcmd - 1)
 		dup2(pipeline->fd[1], 1);
-	ft_redirection(pipeline, cmd);
+	g_shell->exit_value = 0;
+	ft_redirection(cmd);
 	close(pipeline->fd[0]);
 	close(pipeline->fd[1]);
-	if (is_buildin(cmd[0]))
+	if (g_shell->exit_value == 0 && is_buildin(cmd[0]))
 		exec_buildin(cmd, 1);
-	if (access(cmd[0], X_OK) == 0)
+	if (g_shell->exit_value == 0 && access(cmd[0], X_OK) == 0)
 		execve(cmd[0], cmd, envp);
+	free(pipeline->pid);
+	if (g_shell->exit_value)
+		ft_main_exit(g_shell->exit_value);
+	else
+		ft_main_exit(errno);
 }
 
 void	ft_pipe_parent(t_pipe *pipeline, char **cmd)
 {
 	if (access(cmd[0], X_OK) == -1 && !is_buildin(cmd[0]))
 	{
+		g_shell->exit_value = 127;
 		write(2, cmd[0], ft_strlen(cmd[0]));
 		write(2, ": command not found\n", 20);
 	}
@@ -57,7 +64,7 @@ void	ft_pipe_parent(t_pipe *pipeline, char **cmd)
 
 //fd[1] == entre
 //fd[0] == sortie
-int	ft_pipe(char ***cmds, char **envp)
+void	ft_pipe(char ***cmds, char **envp)
 {
 	t_pipe	pipeline;
 	int		res;
@@ -65,11 +72,11 @@ int	ft_pipe(char ***cmds, char **envp)
 	pipeline.i = 0;
 	pipeline.prev_pipe = -1;
 	pipeline.nbcmd = ft_cmdslen(cmds);
-	pipeline.pid = malloc(sizeof(int) * (pipeline.nbcmd - 1));
+	pipeline.pid = malloc(sizeof(int) * (pipeline.nbcmd));
 	while (pipeline.i < pipeline.nbcmd)
 	{
 		if (pipe(pipeline.fd) == -1)
-			return (-1);
+			ft_main_exit(errno);
 		pipeline.pid[pipeline.i] = fork();
 		if (pipeline.pid[pipeline.i] == 0)
 			ft_pipe_child(&pipeline, cmds[pipeline.i], envp);
@@ -81,5 +88,5 @@ int	ft_pipe(char ***cmds, char **envp)
 	while (pipeline.i < pipeline.nbcmd)
 		waitpid(pipeline.pid[pipeline.i++], &res, 0);
 	free(pipeline.pid);
-	return (WEXITSTATUS(res));
+	g_shell->exit_value = WEXITSTATUS(res);
 }
