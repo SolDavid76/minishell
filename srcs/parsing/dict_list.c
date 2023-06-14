@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:40:14 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/13 10:55:03 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:43:51 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	ft_dictsize(t_dict *lst)
 	}
 	return (i);
 }
-
 
 void	ft_dictclear(t_dict	*lst)
 {

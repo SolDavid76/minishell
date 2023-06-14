@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:31:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/14 11:07:57 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:34:00 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,13 @@ t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp);
 t_listp	*parsing(char *tmp, char **envp);
 
 t_dict	*ft_unset(char *var, t_dict *dict);
-t_dict	*ft_export(t_dict *dict, char *key, char *content);
+t_dict	*add_dict(t_dict *dict, char *key, char *content);
 void	export_without_arg(t_dict *dict);
+
+char	*get_key(char *str);
+char	*get_content(char *str);
+
+
 
 
 

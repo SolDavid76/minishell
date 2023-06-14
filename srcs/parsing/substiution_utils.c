@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:58:29 by ennollet          #+#    #+#             */
-/*   Updated: 2023/05/31 14:59:49 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:49:13 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ char	**get_path_line(char **env)
 	int		i;
 
 	i = 0;
-	while (env[i] && !(ft_strncmp("PATH", env[i], 4) == 0 && env[i][4] == '='))
+	path_split = NULL;
+	while (env[i])
 	{
-		i++;
+		if (ft_strncmp("PATH=", env[i], 5) == 0)
+			path_split = ft_split(env[i] + 5, ':');
+
+		i++;	
 	}
-	path_split = ft_split(env[i] + 5, ':');
 	return (path_split);
 }
 

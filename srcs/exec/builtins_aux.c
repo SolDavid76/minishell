@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   builtins_aux.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 11:04:48 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/13 16:37:59 by ennollet         ###   ########.fr       */
+/*   Created: 2023/06/14 15:46:25 by ennollet          #+#    #+#             */
+/*   Updated: 2023/06/14 15:47:02 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_shell	*g_shell;
 
 t_dict	*suppr(t_dict *dict, t_dict *next)
 {
@@ -33,8 +35,8 @@ t_dict	*suppr(t_dict *dict, t_dict *next)
 
 t_dict	*ft_unset(char *var, t_dict *dict)
 {
-	t_dict *tmp;
-	
+	t_dict	*tmp;
+
 	tmp = dict;
 	if (strcmp(var, tmp->key) == 0)
 	{
@@ -50,7 +52,6 @@ t_dict	*ft_unset(char *var, t_dict *dict)
 	return (dict);
 }
 
-
 void	export_without_arg(t_dict *dict)
 {
 	t_dict	*tmp;
@@ -63,7 +64,7 @@ void	export_without_arg(t_dict *dict)
 	}
 }
 
-t_dict	*ft_export(t_dict *dict, char *key, char *content)
+t_dict	*add_dict(t_dict *dict, char *key, char *content)
 {
 	t_dict	*tmp;
 
@@ -82,3 +83,40 @@ t_dict	*ft_export(t_dict *dict, char *key, char *content)
 	return (dict);
 }
 
+void	*export_aux(char *str, t_dict *dict)
+{
+	char	*key;
+	char	*content;
+
+	key = get_key(str);
+	content = get_content(str);
+	dict = add_dict(dict, key, content);
+	return (dict);
+}
+
+t_dict	*export(char *str, t_dict *dict)
+{
+	int		i;
+
+	i = 0;
+	if (!str)
+	{
+		export_without_arg(dict);
+		return (dict);
+	}
+	if (str[i] >= '0' && str[i] <= '9')
+	{
+		g_shell->exit_value = 1;
+		return (printf("export: `%s': not a valid identifier", str), dict);
+	}
+	while (str[i])
+	{
+		if (!(is_valid_variable(str[i++])))
+		{
+			g_shell->exit_value = 2;
+			return (printf("export: `%s': not a valid identifier", str), dict);
+		}
+	}
+	dict = export_aux(str, dict);
+	return (dict);
+}

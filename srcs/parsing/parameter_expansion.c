@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:41:31 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/01 11:36:59 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:12:58 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	*new_expand_aux(char *content, char *res, int flag, char **envp)
 				res = ft_strjoin(res, tmp);
 				i++;
 				while (is_valid_variable(content[i]))
+					i++;
+				if (content[i] == '?')
 					i++;
 			}
 		}

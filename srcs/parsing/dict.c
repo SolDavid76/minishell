@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:31:17 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/13 16:37:10 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:50:47 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,30 +140,30 @@ char	**build_env(t_dict *dict)
 	return (env);
 }
 
-int	main(int ac, char **av, char **envp)
-{
-	t_dict	*dict;
-	// char **tab;
-	// int	i;
+// int	main(int ac, char **av, char **envp)
+// {
+// 	t_dict	*dict;
+// 	// char **tab;
+// 	// int	i;
 
-	// i = 0;
-	dict = get_dict(envp);
-	// dict = ft_unset("SHELL", dict);
-	// dict = ft_export(dict, "bob", "lol");
-	export_without_arg(dict);
-	// print_dict(&dict);
-	// tab  =  build_env(dict);
-	// while (tab[i])
-	// {
-	// 	printf("%s\n", tab[i]);
-	// 	i++;
-	// }
-	ft_dictclear(dict);
-	// i  = 0;
-	// while (tab[i])
-	// 	free(tab[i++]);
-	// free(tab);
-	(void)ac;
-	(void)av;
-	(void)dict;
-}
+// 	// i = 0;
+// 	dict = get_dict(envp);
+// 	// dict = ft_unset("SHELL", dict);
+// 	// dict = ft_export(dict, "bob", "lol");
+// 	export_without_arg(dict);
+// 	// print_dict(&dict);
+// 	// tab  =  build_env(dict);
+// 	// while (tab[i])
+// 	// {
+// 	// 	printf("%s\n", tab[i]);
+// 	// 	i++;
+// 	// }
+// 	ft_dictclear(dict);
+// 	// i  = 0;
+// 	// while (tab[i])
+// 	// 	free(tab[i++]);
+// 	// free(tab);
+// 	(void)ac;
+// 	(void)av;
+// 	(void)dict;
+// }

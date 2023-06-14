@@ -19,6 +19,8 @@ SRC		=		acces.c\
 				substiution_utils.c\
 				substitution_utils2.c\
 				list2.c\
+				dict.c\
+				dict_list.c\
 
 SRCS_EX_DIR		= srcs/exec/
 
@@ -31,6 +33,7 @@ SRC_EX	=		builtins.c\
 				redirection.c\
 				shell.c\
 				ft_exec.c\
+				builtins_aux.c\
 
 SRCS_UTI_DIR	=	srcs/
 
