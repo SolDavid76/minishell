@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/14 15:48:23 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:59:05 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_redirection_aux(char **cmd, int i)
 		fd = open(cmd[i + 1], O_CREAT + O_WRONLY + O_TRUNC, 0666);
 	else if (!ft_strcmp(cmd[i], ">>"))
 		fd = open(cmd[i + 1], O_CREAT + O_WRONLY + O_APPEND, 0666);
-	else if (!ft_strcmp(cmd[i], "<"))
+	else if (!ft_strcmp(cmd[i], "<") || !ft_strcmp(cmd[i], "<<"))
 		fd = open(cmd[i + 1], O_RDONLY);
 	if (fd == -1)
 	{
@@ -59,7 +59,7 @@ void	ft_redirection(char **cmd)
 		fd = ft_redirection_aux(cmd, i);
 		if (!ft_strcmp(cmd[i], ">") || !ft_strcmp(cmd[i], ">>"))
 			dup2(fd, 1);
-		else if (!ft_strcmp(cmd[i], "<"))
+		else if (!ft_strcmp(cmd[i], "<") || !ft_strcmp(cmd[i], "<<"))
 			dup2(fd, 0);
 		if (fd)
 		{

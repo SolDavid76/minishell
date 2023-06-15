@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:41 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/14 18:04:42 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/15 16:00:01 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 	}
 	docs = here_doc_open(docs, input, cmd[x + 1]);
 	ft_lst_free(input);
-	cmd[x] = ft_strdup("<");
+	free(cmd[x + 1]);
 	cmd[x + 1] = ft_strdup(ft_lstlast(docs)->content);
 	return (docs);
 }

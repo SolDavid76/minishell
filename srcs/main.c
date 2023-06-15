@@ -88,6 +88,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
+	
 	ft_shell_init(envp);
 	g_shell->exit_value = 0;
 	while (42)
