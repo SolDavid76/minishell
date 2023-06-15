@@ -29,7 +29,7 @@
 typedef struct s_shell
 {
 	int		exit_value;
-	t_list	*lst;
+	t_list	*here_docs;
 	char	**envp;
 	char	***cmds;
 }			t_shell;

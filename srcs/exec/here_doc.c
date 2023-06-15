@@ -6,13 +6,23 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:41 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/13 18:52:33 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/14 18:04:42 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_shell	*g_shell;
+
+void	*here_doc_remove(t_list *docs)
+{
+	while (docs)
+	{
+		unlink(docs->content);
+		docs = docs->next;
+	}
+	return (NULL);
+}
 
 t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 {
@@ -79,7 +89,7 @@ t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 	}
 	if (!ft_lstlast(input)->content)
 	{
-		write(2, "\nwarning : here-document at line ", 34);
+		write(2, "warning : here-document at line ", 33);
 		ft_putnbr_fd(2, i);
 		write(2, " delimited by end-of-file (wanted `", 36);
 		write(2, cmd[x + 1], ft_strlen(cmd[x + 1]));
@@ -87,8 +97,8 @@ t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 	}
 	docs = here_doc_open(docs, input, cmd[x + 1]);
 	ft_lst_free(input);
-	cmd[x] = "<";
-	cmd[x + 1] = ft_lstlast(docs)->content;
+	cmd[x] = ft_strdup("<");
+	cmd[x + 1] = ft_strdup(ft_lstlast(docs)->content);
 	return (docs);
 }
 
