@@ -45,6 +45,7 @@ void	ft_main_exit(int code)
 	exit(code);
 }
 
+//doit etre supprime a terme
 char	**ft_envdup(char **envp)
 {
 	char	**res;
@@ -81,27 +82,34 @@ char	***big_join(t_listp *lst)
 	return (res);
 }
 
+//fprintf(stderr, "$? = %d\n", g_shell->exit_value); //debug
+void	minishell(void)
+{
+	struct sigaction	data;
+	t_listp			*lstp;
+	char			*input;
+
+	// signal(SIGINT, handler);
+	// signal(SIGQUIT, handler);
+	signals_init(&data);
+	input = readline("minishell> ");
+	lstp = parsing(input, g_shell->envp);
+	free(input);
+	if (!lstp)
+		return ;
+	g_shell->cmds = big_join(lstp);
+	ft_lstclearp(lstp);
+	ft_exec(g_shell->cmds, g_shell->envp);
+	ft_shell_init(g_shell->envp);
+}
+
 int	main(int ac, char **av, char **envp)
 {
-	t_listp	*lstp;
-	char	*input;
 
 	(void)ac;
 	(void)av;
-	
 	ft_shell_init(envp);
 	g_shell->exit_value = 0;
 	while (42)
-	{
-		fprintf(stderr, "$? = %d\n", g_shell->exit_value); //debug
-		input = readline("un joli prompt > ");
-		lstp = parsing(input, g_shell->envp);
-		free(input);
-		if (!lstp)
-			continue ;
-		g_shell->cmds = big_join(lstp);
-		ft_lstclearp(lstp);
-		ft_exec(g_shell->cmds, g_shell->envp);
-		ft_shell_init(envp);
-	}
+		minishell();
 }

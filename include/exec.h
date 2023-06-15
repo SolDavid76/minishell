@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/14 17:54:50 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/15 18:15:09 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ void	echo(char **cmd);
 /* shell.c */
 int		is_in_variable(char c);
 char	*ft_env_sub(char *key, char **envp);
+
+/* signals.c */
+void	handler(int signal, siginfo_t *info, void* context);
+void	handler_child(int signal);
+void	signals_init(struct sigaction *data);
 
 /* exec.c */
 void	ft_exec(char ***cmds, char **envp);
