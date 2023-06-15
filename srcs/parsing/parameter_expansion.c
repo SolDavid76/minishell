@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:41:31 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/14 14:12:58 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/15 15:47:01 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,17 @@ t_listp	*expansion(t_listp **token, char **envp)
 	int		i;
 
 	i = 0;
+	if (!envp)
+		return (NULL);
 	tmp = *token;
 	while (tmp)
 	{
 		i = 0;
 		while (tmp->content2[i])
 		{
-			tmp->content2[i] = new_expand(tmp->content2[i], envp);
+			if (!(i > 0 && tmp->content2[i - 1] && \
+				ft_strcmp(tmp->content2[i - 1], "<<") == 0))
+				tmp->content2[i] = new_expand(tmp->content2[i], envp);
 			i++;
 		}
 		tmp = tmp->next;
