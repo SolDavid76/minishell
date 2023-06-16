@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 11:27:23 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/16 12:22:50 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:50:51 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,22 @@ void	cd(char	*path)
 	}
 }
 
-int main(int ac, char **av, char **envp)
-{
-	ft_shell_init(envp);
-	free_tab(g_shell->envp);
+// int main(int ac, char **av, char **envp)
+// {
+// 	ft_shell_init(envp);
+// 	free_tab(g_shell->envp);
 
-	g_shell->dict = get_dict(envp);
-	g_shell->envp = build_env(g_shell->dict);
-	printf_env(g_shell->envp);
-	cd("../");
-	free_tab(g_shell->envp);
-	g_shell->envp = build_env(g_shell->dict);
-	printf_env(g_shell->envp);
-	free_tab(g_shell->envp);
-	ft_dictclear(g_shell->dict);
-	free(g_shell);
+// 	g_shell->dict = get_dict(envp);
+// 	g_shell->envp = build_env(g_shell->dict);
+// 	printf_env(g_shell->envp);
+// 	cd("../");
+// 	free_tab(g_shell->envp);
+// 	g_shell->envp = build_env(g_shell->dict);
+// 	printf_env(g_shell->envp);
+// 	free_tab(g_shell->envp);
+// 	ft_dictclear(g_shell->dict);
+// 	free(g_shell);
 
-	(void)ac;
-	(void)av;
-}
+// 	(void)ac;
+// 	(void)av;
+// }
