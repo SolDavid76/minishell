@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:37 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/15 16:45:14 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/16 15:25:24 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ int	ft_cmdslen(char ***cmds)
 	return (i);
 }
 
-void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp)
+void	ft_pipe_child_redirection(t_pipe *pipeline, char **cmd)
 {
-	// signal(SIGINT, handler_child);
-	// signal(SIGQUIT, handler_child);
 	if (pipeline->i != 0)
 	{
 		dup2(pipeline->prev_pipe, 0);
@@ -39,6 +37,14 @@ void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp)
 	ft_redirection(cmd);
 	close(pipeline->fd[0]);
 	close(pipeline->fd[1]);
+}
+
+	// signal(SIGINT, handler_child);
+	// signal(SIGQUIT, handler_child);
+void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp)
+{
+	free(pipeline->pid);
+	ft_pipe_child_redirection(pipeline, cmd);
 	if (g_shell->exit_value == 0 && is_buildin(cmd[0]))
 		exec_buildin(cmd, 1);
 	if (g_shell->exit_value == 0 && access(cmd[0], X_OK) == 0)
