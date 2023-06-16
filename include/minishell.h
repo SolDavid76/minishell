@@ -29,10 +29,13 @@
 
 typedef struct s_shell
 {
+	int		savedin;
+	int		savedout;
 	int		exit_value;
 	t_list	*here_docs;
 	char	**envp;
 	char	***cmds;
+	t_dict	*dict;
 }			t_shell;
 
 /* main.c */

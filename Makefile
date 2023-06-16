@@ -35,6 +35,7 @@ SRC_EX	=		builtins.c\
 				ft_exec.c\
 				signals.c\
 				builtins_aux.c\
+				cd.c\
 
 SRCS_UTI_DIR	=	srcs/
 
