@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:02:09 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/19 14:51:23 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:52:42 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,14 @@ int skip_newline(char **str)
 				flag = 1;
 			j++;
 			if (str[i][j] == '-' && flag == 1)
-				retur	// j = 0;
-
+				return (i);
+		}
+		i++;
+	}
+	return (i - 1);
+}
+void	echo(char **cmd)
+{
 	int	option;
 	int	i;
 
