@@ -33,6 +33,7 @@ typedef struct s_shell
 	int		savedout;
 	int		exit_value;
 	t_list	*here_docs;
+	t_pipe	*pipeline;
 	char	**envp;
 	char	***cmds;
 }			t_shell;
