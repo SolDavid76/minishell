@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/19 11:04:03 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/19 14:29:10 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	*ft_lst_free(t_list	*lst);
 
 /* ft_pipe.c */
 int		ft_cmdslen(char ***cmds);
+void	ft_pipe_child_redirection(t_pipe *pipeline, char **cmd);
 void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp);
 void	ft_pipe_parent(t_pipe *pipeline, char **cmd);
 void	ft_pipe(char ***cmds, char **envp);
@@ -82,7 +83,7 @@ char	*ft_env_sub(char *key, char **envp);
 /* signals.c */
 void	handler(int signal);
 void	handler_exec(int signal);
-void	handler_child(int signal);
+void	handler_pipe(int signal);
 
 /* exec.c */
 void	ft_exec(char ***cmds, char **envp);
