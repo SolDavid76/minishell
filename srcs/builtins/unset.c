@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 15:46:25 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:38:54 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:04:27 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,21 @@ t_dict	*suppr(t_dict *dict, t_dict *next)
 	return (next);
 }
 
-t_dict	*unset(char *var, t_dict *dict)
+void	unset(char *var, t_dict *dict)
 {
 	t_dict	*tmp;
 
 	tmp = dict;
 	if (strcmp(var, tmp->key) == 0)
-	{
 		tmp = suppr(NULL, tmp);
-		g_shell->exit_value = 0;
-		return (tmp);
-	}
-	while (tmp->next != NULL)
+	while (tmp != NULL && tmp->next != NULL)
 	{
-		if (strcmp(var, tmp->next->key) == 0)
+		if (ft_strcmp(var, tmp->next->key) == 0)
 			suppr(tmp, tmp->next);
 		tmp = tmp->next;
 	}
-	g_shell->exit_value = 0;
-	return (dict);
+	free_tab(g_shell->envp);
+	g_shell->envp = build_env(g_shell->dict);
 }
 
 // void	export_without_arg(t_dict *dict)

@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/19 11:48:52 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:43:36 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	exec_buildin(char **cmd, int mod)
 	if (!ft_strcmp(cmd[0], "echo"))
 		echo(cmd + 1);
 	if (!ft_strcmp(cmd[0], "cd"))
-		cd(cmd[1]);
+		cd(cmd[1], cmd);
 	if (!ft_strcmp(cmd[0], "pwd"))
 		pwd();
 	if (!ft_strcmp(cmd[0], "export"))
