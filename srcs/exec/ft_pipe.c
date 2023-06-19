@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:37 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/16 15:25:24 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/19 11:52:55 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,15 @@ void	ft_pipe_child_redirection(t_pipe *pipeline, char **cmd)
 	close(pipeline->fd[1]);
 }
 
-	// signal(SIGINT, handler_child);
-	// signal(SIGQUIT, handler_child);
+// signal(SIGINT, handler_child);
+// signal(SIGQUIT, handler_child);
 void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp)
 {
-	free(pipeline->pid);
 	ft_pipe_child_redirection(pipeline, cmd);
 	if (g_shell->exit_value == 0 && is_buildin(cmd[0]))
 		exec_buildin(cmd, 1);
 	if (g_shell->exit_value == 0 && access(cmd[0], X_OK) == 0)
 		execve(cmd[0], cmd, envp);
-	free(pipeline->pid);
 	if (g_shell->exit_value)
 		ft_main_exit(g_shell->exit_value);
 	ft_main_exit(errno);
@@ -80,6 +78,7 @@ void	ft_pipe(char ***cmds, char **envp)
 	pipeline.prev_pipe = -1;
 	pipeline.nbcmd = ft_cmdslen(cmds);
 	pipeline.pid = malloc(sizeof(int) * (pipeline.nbcmd));
+	g_shell->pipeline = &pipeline;
 	while (pipeline.i < pipeline.nbcmd)
 	{
 		if (pipe(pipeline.fd) == -1)
@@ -94,6 +93,5 @@ void	ft_pipe(char ***cmds, char **envp)
 	pipeline.i = 0;
 	while (pipeline.i < pipeline.nbcmd)
 		waitpid(pipeline.pid[pipeline.i++], &res, 0);
-	free(pipeline.pid);
 	g_shell->exit_value = WEXITSTATUS(res);
 }
