@@ -36,6 +36,7 @@ typedef struct s_shell
 	t_pipe	*pipeline;
 	char	**envp;
 	char	***cmds;
+	t_dict	*dict;
 }			t_shell;
 
 /* main.c */
