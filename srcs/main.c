@@ -27,7 +27,6 @@ void	ft_shell_init(char **envp)
 	else
 	{
 		g_shell = malloc(sizeof(t_shell));
-		g_shell->pipeline = NULL;
 		g_shell->envp = ft_envdup(envp);
 		g_shell->savedin = dup(0);
 		g_shell->savedout = dup(1);
@@ -41,11 +40,6 @@ void	ft_main_exit(int code)
 {
 	if (g_shell)
 	{
-		if (g_shell->pipeline)
-		{
-			free(g_shell->pipeline->pid);
-			g_shell->pipeline = NULL;
-		}
 		dupnclose(g_shell->savedin, g_shell->savedout);
 		here_doc_remove(g_shell->here_docs);
 		ft_lst_free(g_shell->here_docs);
