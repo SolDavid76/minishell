@@ -19,13 +19,10 @@ SRC		=		acces.c\
 				substiution_utils.c\
 				substitution_utils2.c\
 				list2.c\
-				dict.c\
-				dict_list.c\
 
 SRCS_EX_DIR		= srcs/exec/
 
-SRC_EX	=		builtins.c\
-				free.c\
+SRC_EX	=		free.c\
 				ft_itoa.c\
 				ft_pipe.c\
 				here_doc.c\
@@ -34,8 +31,23 @@ SRC_EX	=		builtins.c\
 				shell.c\
 				ft_exec.c\
 				signals.c\
-				builtins_aux.c\
-				cd.c\
+
+SRCS_BUI_DIR	= srcs/builtins/
+
+SRC_BUI	=		cd.c\
+				dict.c\
+				dict_list.c\
+				builtins.c\
+				unset.c\
+				export.c\
+				echo.c\
+				env.c\
+				exit.c\
+				pwd.c\
+				
+
+
+
 
 SRCS_UTI_DIR	=	srcs/
 
@@ -46,12 +58,16 @@ SRC_UTI			=	main.c\
 SRCS =$(addprefix $(SRCS_DIR), $(SRC))\
 	$(addprefix $(SRCS_EX_DIR), $(SRC_EX))\
 	$(addprefix $(SRCS_UTI_DIR), $(SRC_UTI))\
+	$(addprefix $(SRCS_BUI_DIR), $(SRC_BUI))\
+
 
 OBJS_DIR	=	objs/
 
 OBJ 		= $(SRC:.c=.o)\
 				$(SRC_EX:.c=.o)\
 				$(SRC_UTI:.c=.o)\
+				$(SRC_BUI:.c=.o)\
+
 
 
 OBJS 		= $(addprefix $(OBJS_DIR), $(OBJ))
@@ -79,7 +95,9 @@ $(OBJS_DIR)%.o: $(SRCS_EX_DIR)%.c
 
 $(OBJS_DIR)%.o: $(SRCS_UTI_DIR)%.c
 	$(CC) $(FLAGS) -c $< -o $@ $(INCS)
-
+	
+$(OBJS_DIR)%.o: $(SRCS_BUI_DIR)%.c
+	$(CC) $(FLAGS) -c $< -o $@ $(INCS)
 
 $(OBJS_DIR):
 	mkdir $(OBJS_DIR)

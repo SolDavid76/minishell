@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/16 11:22:51 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/19 11:48:52 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,37 @@ void	exec_buildin(char **cmd, int mod)
 	ft_redirection(cmd);
 	if (!ft_strcmp(cmd[0], "echo"))
 		echo(cmd + 1);
+	if (!ft_strcmp(cmd[0], "cd"))
+		cd(cmd[1]);
+	if (!ft_strcmp(cmd[0], "pwd"))
+		pwd();
+	if (!ft_strcmp(cmd[0], "export"))
+		export(cmd[1], g_shell->dict);
+	if (!ft_strcmp(cmd[0], "unset"))
+		unset(cmd[1], g_shell->dict);
+	if (!ft_strcmp(cmd[0], "env"))
+		env(g_shell->envp);
 	if (mod)
 		ft_main_exit(g_shell->exit_value);
 }
 
-void	echo(char **cmd)
-{
-	int	option;
-	int	i;
+// void	echo(char **cmd)
+// {
+// 	int	option;
+// 	int	i;
 
-	option = !ft_strcmp(cmd[0], "-n");
-	i = option;
-	while (cmd[i])
-	{
-		write(1, cmd[i], ft_strlen(cmd[i]));
-		if (cmd[i + 1])
-			write(1, " ", 1);
-		i++;
-	}
-	if (!option)
-		write(1, "\n", 1);
-}
+// 	option = !ft_strcmp(cmd[0], "-n");
+// 	i = option;
+// 	while (cmd[i])
+// 	{
+// 		write(1, cmd[i], ft_strlen(cmd[i]));
+// 		if (cmd[i + 1])
+// 			write(1, " ", 1);
+// 		i++;
+// 	}
+// 	if (!option)
+// 		write(1, "\n", 1);
+// }
 
 // void	pwd(char **cmd)
 // {

@@ -1,56 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_aux.c                                     :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/14 15:46:25 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/14 15:47:02 by ennollet         ###   ########.fr       */
+/*   Created: 2023/06/19 10:53:55 by ennollet          #+#    #+#             */
+/*   Updated: 2023/06/19 11:58:31 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_shell	*g_shell;
-
-t_dict	*suppr(t_dict *dict, t_dict *next)
-{
-	if (dict != NULL)
-	{
-		free(next->key);
-		free(next->content);
-		dict->next = dict->next->next;
-		free(next);
-		return (dict);
-	}
-	else
-	{
-		free(next->key);
-		free(next->content);
-		next = next->next;
-	}
-	return (next);
-}
-
-t_dict	*ft_unset(char *var, t_dict *dict)
-{
-	t_dict	*tmp;
-
-	tmp = dict;
-	if (strcmp(var, tmp->key) == 0)
-	{
-		tmp = suppr(NULL, tmp);
-		return (tmp);
-	}
-	while (tmp->next != NULL)
-	{
-		if (strcmp(var, tmp->next->key) == 0)
-			suppr(tmp, tmp->next);
-		tmp = tmp->next;
-	}
-	return (dict);
-}
 
 void	export_without_arg(t_dict *dict)
 {
@@ -107,14 +69,14 @@ t_dict	*export(char *str, t_dict *dict)
 	if (str[i] >= '0' && str[i] <= '9')
 	{
 		g_shell->exit_value = 1;
-		return (printf("export: `%s': not a valid identifier", str), dict);
+		return (printf("export: `%s': not a valid identifier\n", str), dict);
 	}
-	while (str[i])
+	while (str[i] && str[i] != '=')
 	{
 		if (!(is_valid_variable(str[i++])))
 		{
 			g_shell->exit_value = 2;
-			return (printf("export: `%s': not a valid identifier", str), dict);
+			return (printf("export: `%s': not a valid identifier\n", str), dict);
 		}
 	}
 	dict = export_aux(str, dict);
