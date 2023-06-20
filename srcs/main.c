@@ -27,7 +27,8 @@ void	ft_shell_init(char **envp)
 	else
 	{
 		g_shell = malloc(sizeof(t_shell));
-		g_shell->envp = ft_envdup(envp);
+		g_shell->dict = get_dict(envp);
+		g_shell->envp = build_env(g_shell->dict);
 		g_shell->savedin = dup(0);
 		g_shell->savedout = dup(1);
 		g_shell->here_docs = NULL;
@@ -43,6 +44,7 @@ void	ft_main_exit(int code)
 		dupnclose(g_shell->savedin, g_shell->savedout);
 		here_doc_remove(g_shell->here_docs);
 		ft_lst_free(g_shell->here_docs);
+		ft_dictclear(g_shell->dict);
 		free_tab_tab(g_shell->cmds);
 		free_tab(g_shell->envp);
 		free(g_shell);

@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:15:34 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/19 10:15:37 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:50:27 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,24 @@ int	check_dict(char *key)
 }
 
 
-void	cd(char	*path)
+void	cd(char	*path, char **cmd)
 {
 	char	tmp[PATH_MAX];
 	char	tmp2[PATH_MAX];
 	t_dict	*test;
 	
 	test = g_shell->dict;
+	if (ft_strslen(cmd) > 2)
+	{
+		write(2, "cd: too many arguments\n", 24);
+		g_shell->exit_value = 1;
+		return ;		
+	}
 	getcwd(tmp2, sizeof(tmp));
 	if (chdir(path) == 0)
 	{
 		if (check_dict("OLDPWD") == 1)
 		{
-			// getcwd(tmp, sizeof(tmp));
 			while (strcmp(test->key, "OLDPWD") != 0)
 				test = test->next;
 			free(test->content);
@@ -68,11 +73,16 @@ void	cd(char	*path)
 			test = g_shell->dict;
 			while (strcmp(test->key, "PWD") != 0)
 				test = test->next;
-			// chdir(path);
 			getcwd(tmp, sizeof(tmp));
 			free(test->content);
 			test->content = ft_strdup(tmp);
 		}
+	free_tab(g_shell->envp);
+	g_shell->envp = build_env(g_shell->dict);
+	}
+	else
+	{	perror("cd: ");
+		g_shell->exit_value = 1;
 	}
 }
 

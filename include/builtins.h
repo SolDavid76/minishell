@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:25:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/19 11:39:32 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:50:48 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 # include <limits.h>
 # include <linux/limits.h>
 
-void	cd(char	*path);
+void	cd(char	*path, char **cmd);
 void	env(char **envp);
 void	echo(char **cmd);
-int	pwd(void);
-t_dict	*export(char *str, t_dict *dict);
-t_dict	*unset(char *var, t_dict *dict);
+int		pwd(void);
+void	export(char *str, t_dict *dict);
+void	unset(char *var, t_dict *dict);
 
 
 
