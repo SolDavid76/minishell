@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/19 14:29:10 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 12:31:24 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ char	*ft_env_sub(char *key, char **envp);
 
 /* signals.c */
 void	handler(int signal);
-void	handler_exec(int signal);
-void	handler_pipe(int signal);
+void	status_update(int status);
 
 /* exec.c */
 void	ft_exec(char ***cmds, char **envp);

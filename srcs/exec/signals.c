@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:33:30 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/19 14:43:12 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 12:54:23 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,21 @@ void	handler(int signal)
 	}
 }
 
-void	handler_exec(int signal)
+void	status_update(int status)
 {
-	close(1);
-	if (signal == SIGINT)
+	if (WEXITSTATUS(status))
+		g_shell->exit_value = WEXITSTATUS(status);
+	else if (WTERMSIG(status))
 	{
-		write(2, "\n", 1);
-		ft_main_exit(130);
-	}
-	if (signal == SIGQUIT)
-	{
-		write(2, "Quit (core dumped)\n", 20);
-		ft_main_exit(131);
+		if (WTERMSIG(status) == SIGINT)
+		{
+			g_shell->exit_value = 130;
+			write(1, "\n", 1);
+		}
+		if (WTERMSIG(status) == SIGQUIT)
+		{
+			g_shell->exit_value = 131;
+			write(1, "Quit (core dumped)\n", 19);
+		}
 	}
 }
