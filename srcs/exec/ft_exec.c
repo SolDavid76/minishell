@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:52:44 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 12:35:33 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 17:59:30 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@ void	ft_exec(char ***cmds, char **envp)
 	if (ft_cmdslen(cmds) && !is_buildin(cmds[0][0]))
 		ft_pipe(cmds, envp);
 	else
-		exec_buildin(cmds[0], 0);
+	{
+		ft_redirection(cmds[0]);
+		if (!g_shell->exit_value)
+			exec_buildin(cmds[0], 0);
+	}
 }

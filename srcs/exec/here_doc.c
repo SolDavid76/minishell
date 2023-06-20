@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:41 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 17:04:12 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 18:32:59 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	*here_doc_remove(t_list *docs)
 
 t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 {
-	char	*tmp;
 	char	*str;
 	int		i;
 
@@ -38,9 +37,8 @@ t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 		{
 			if (str[i] == '$')
 			{
-				tmp = ft_env_sub(str + 1 + i++, g_shell->envp);
-				write(fd, tmp, ft_strlen(tmp));
-				free(tmp);
+				ft_print_var(g_shell->envp, str + 1 + i++, fd);
+				i += (str[i] == '?');
 				while (is_in_variable(str[i]) && str[i - 1] != '?')
 					i++;
 			}

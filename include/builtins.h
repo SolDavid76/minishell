@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:25:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/19 16:50:48 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:34:28 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <limits.h>
 # include <linux/limits.h>
 
+int		is_buildin(char *cmd);
+void	exec_buildin(char **cmd, int mod);
 void	cd(char	*path, char **cmd);
 void	env(char **envp);
 void	echo(char **cmd);
