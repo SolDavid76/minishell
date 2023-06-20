@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:01:50 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/20 18:26:48 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:44:02 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp)
 	if (bob != NULL)
 	{
 		bob = substitution(&bob, envp);
-		print_command(&bob);
+		// print_command(&bob);
 		// printf("list size %d\n", ft_lstsizep(bob));
 	}
 	return (bob);

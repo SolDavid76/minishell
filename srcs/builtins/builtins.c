@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 18:33:54 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 18:42:42 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	exec_buildin(char **cmd, int mod)
 		unset(cmd[1], g_shell->dict);
 	if (!ft_strcmp(cmd[0], "env"))
 		env(g_shell->envp);
+	if (!ft_strcmp(cmd[0], "exit"))
+		exec_exit(cmd + 1);
 	if (mod)
 		ft_main_exit(g_shell->exit_value);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:25:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/20 18:34:28 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 18:42:09 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	echo(char **cmd);
 int		pwd(void);
 void	export(char *str, t_dict *dict);
 void	unset(char *var, t_dict *dict);
+void	exec_exit(char **cmd);
+
 
 
 

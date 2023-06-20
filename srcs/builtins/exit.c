@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:57:24 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/20 18:39:59 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:53:11 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	ft_atoi(const char *nptr)
 int	is_number(char *str)
 {
 	int	i;
-
+	if (!str)
+		return (0);
 	i = 0;
 	if (str[i] == '-' || str[i] == '+')
 		i++;
@@ -59,10 +60,12 @@ int	is_number(char *str)
 int	ft_exit(char **cmd)
 {
 	write (1, "exit\n", 6);
+	if (!cmd[0])
+		return (0);
 	if (is_number(cmd[0]) == 1)
 		return (write(2, "bash: exit numeric argument required\n", 38), 2);
 	if (ft_strslen(cmd) > 1)
-		return (write(2,"bash: exit: to many arguments\n", 31), 1);
+		return (write(2,"bash: exit: too many arguments\n", 32), 1);
 	else
 		return (ft_atoi(cmd[0]));
 	return (0);
