@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 12:31:24 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 18:34:40 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,9 @@ char	*ft_itoa(int x);
 void	*free_tab(char **ptr);
 void	*free_tab_tab(char ***ptr);
 
-/* builtins.c */
-int		is_buildin(char *cmd);
-void	exec_buildin(char **cmd, int mod);
-void	echo(char **cmd);
-// void	cd(char **cmd);
-// void	pwd(char **cmd);
-// void	unset(t_shell *shell, char *key);
-// void	export(t_shell *shell, char *key);
-// void	env(t_shell *shell);
-// void	ft_exit(char **cmd);
-
 /* shell.c */
 int		is_in_variable(char c);
-char	*ft_env_sub(char *key, char **envp);
+void	ft_print_var(char **envp, char *key, int fd);
 
 /* signals.c */
 void	handler(int signal);

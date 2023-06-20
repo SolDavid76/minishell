@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:37 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 12:30:45 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 18:01:08 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void	ft_pipe(char ***cmds, char **envp)
 	while (pipeline.i < pipeline.nbcmd)
 		waitpid(pipeline.pid[pipeline.i++], &res, 0);
 	free(pipeline.pid);
-	status_update(res);
+	if (!g_shell->exit_value)
+		status_update(res);
 }

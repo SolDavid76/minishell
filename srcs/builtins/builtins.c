@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/19 16:43:36 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:33:54 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	is_buildin(char *cmd)
 
 void	exec_buildin(char **cmd, int mod)
 {
-	ft_redirection(cmd);
 	if (!ft_strcmp(cmd[0], "echo"))
 		echo(cmd + 1);
 	if (!ft_strcmp(cmd[0], "cd"))
@@ -51,64 +50,3 @@ void	exec_buildin(char **cmd, int mod)
 	if (mod)
 		ft_main_exit(g_shell->exit_value);
 }
-
-// void	echo(char **cmd)
-// {
-// 	int	option;
-// 	int	i;
-
-// 	option = !ft_strcmp(cmd[0], "-n");
-// 	i = option;
-// 	while (cmd[i])
-// 	{
-// 		write(1, cmd[i], ft_strlen(cmd[i]));
-// 		if (cmd[i + 1])
-// 			write(1, " ", 1);
-// 		i++;
-// 	}
-// 	if (!option)
-// 		write(1, "\n", 1);
-// }
-
-// void	pwd(char **cmd)
-// {
-// 	int		size;
-// 	char	*buf;
-
-// 	if (cmd[1] != NULL)
-// 	{
-// 		write(2, "pwd: too many arguments\n", 24);
-// 		return ;
-// 	}
-// 	size = 1;
-// 	buf = NULL;
-// 	while (!buf)
-// 		buf = getcwd(buf, size++);
-// 	write(1, buf, ft_strlen(buf));
-// 	write(1, "\n", 1);
-// }
-
-// void	unset(t_shell *shell, char *key)
-// {
-// 	t_dict	*tmp;
-
-// 	tmp = ft_dict_find(shell->env, key);
-// 	if (tmp && tmp == shell->env)
-// 		shell->env = shell->env->next;
-// 	ft_dict_del(tmp);
-// }
-
-// void	env(t_shell *shell)
-// {
-// 	t_dict	*tmp;
-
-// 	tmp = shell->env;
-// 	while (tmp)
-// 	{
-// 		write(1, tmp->key, ft_strlen(tmp->key));
-// 		write(1, "=", 1);
-// 		write(1, tmp->content, ft_strlen(tmp->content));
-// 		write(1, "\n", 1);
-// 		tmp = tmp->next;
-// 	}
-// }

@@ -42,7 +42,6 @@ typedef struct s_shell
 /* main.c */
 void	ft_shell_init(char **envp);
 void	ft_main_exit(int code);
-char	**ft_envdup(char **envp); //a supprimer
 char	***big_join(t_listp *lst);
 void	minishell(void);
 
