@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:03:01 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/14 14:43:40 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:38:20 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ char	*check_variable(char *str, char **envp)
 			tmp = assign_variable(envp[j], i + 1);
 		j++;
 	}
+	if (str[i] && str[i] == '?')
+		tmp = ft_strjoin_char(tmp, '?');
 	if (tmp)
 		return (tmp);
 	return (NULL);
