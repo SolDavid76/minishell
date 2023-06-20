@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:49 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/15 12:12:25 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 17:03:56 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ft_env_sub(char *key, char **envp)
 		while (key[j] == envp[i][j] && is_valid_variable(key[j]))
 			j++;
 		if (!is_valid_variable(key[j]) && envp[i][j] == '=')
-			return (envp[i] + j + 1);
+			return (ft_strdup(envp[i] + j + 1));
 		i++;
 	}
 	return (NULL);

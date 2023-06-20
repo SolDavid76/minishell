@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:41 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/15 16:00:01 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/20 17:04:12 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd)
 			{
 				tmp = ft_env_sub(str + 1 + i++, g_shell->envp);
 				write(fd, tmp, ft_strlen(tmp));
-				while (str[i] && is_in_variable(str[i]))
+				free(tmp);
+				while (is_in_variable(str[i]) && str[i - 1] != '?')
 					i++;
 			}
 			else

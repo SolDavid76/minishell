@@ -52,22 +52,6 @@ void	ft_main_exit(int code)
 	exit(code);
 }
 
-//doit etre supprime a terme
-char	**ft_envdup(char **envp)
-{
-	char	**res;
-	int		i;
-
-	res = malloc(sizeof(char *) * (ft_tablen(envp) + 1));
-	if (!res)
-		exit(1);
-	i = -1;
-	while (envp[++i])
-		res[i] = ft_strdup(envp[i]);
-	res[i] = NULL;
-	return (res);
-}
-
 char	***big_join(t_listp *lst)
 {
 	char	***res;
