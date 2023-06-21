@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:31:17 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/14 15:50:47 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:56:12 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,55 +115,26 @@ t_dict	*get_dict(char **envp)
 		get_key(envp[i])));
 		i++;
 	}
-	// print_dict(&dict);
 	return (dict);
 }
 
-char	**build_env(t_dict *dict)
-{
-	int		size;
-	char	**env;
-
-	size = ft_dictsize(dict);
-	env = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!env)
-		return (NULL);
-	size = 0;
-	while (dict)
-	{
-		env[size] = ft_strjoin_char_env(dict->key, '=');
-		env[size] = ft_strjoin_env(env[size], dict->content);
-		size++;
-		dict = dict->next;
-	}
-	env[size] = 0;
-	return (env);
-}
-
-// int	main(int ac, char **av, char **envp)
+// char	**build_env(t_dict *dict)
 // {
-// 	t_dict	*dict;
-// 	// char **tab;
-// 	// int	i;
+// 	int		size;
+// 	char	**env;
 
-// 	// i = 0;
-// 	dict = get_dict(envp);
-// 	// dict = ft_unset("SHELL", dict);
-// 	// dict = ft_export(dict, "bob", "lol");
-// 	export_without_arg(dict);
-// 	// print_dict(&dict);
-// 	// tab  =  build_env(dict);
-// 	// while (tab[i])
-// 	// {
-// 	// 	printf("%s\n", tab[i]);
-// 	// 	i++;
-// 	// }
-// 	ft_dictclear(dict);
-// 	// i  = 0;
-// 	// while (tab[i])
-// 	// 	free(tab[i++]);
-// 	// free(tab);
-// 	(void)ac;
-// 	(void)av;
-// 	(void)dict;
+// 	size = ft_dictsize(dict);
+// 	env = (char **)malloc(sizeof(char *) * (size + 1));
+// 	if (!env)
+// 		return (NULL);
+// 	size = 0;
+// 	while (dict)
+// 	{
+// 		env[size] = ft_strjoin_char_env(dict->key, '=');
+// 		env[size] = ft_strjoin_env(env[size], dict->content);
+// 		size++;
+// 		dict = dict->next;
+// 	}
+// 	env[size] = 0;
+// 	return (env);
 // }

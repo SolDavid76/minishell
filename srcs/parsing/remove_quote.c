@@ -6,23 +6,11 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 15:57:31 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/01 11:37:24 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:02:55 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// int	ft_strlen(char *str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!str)
-// 		return (0);
-// 	while (str[i])
-// 		i++;
-// 	return (i);
-// }
 
 int	find_end(char *str, char c)
 {
@@ -83,6 +71,5 @@ t_listp	*remove_quote(t_listp **token)
 		}
 		tmp = tmp->next;
 	}
-	// printf("after remove quote\n");
 	return (*token);
 }

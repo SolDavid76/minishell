@@ -6,25 +6,11 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:01:43 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/01 14:11:38 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:10:24 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static void	*free_split(char **strs)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (strs[i])
-// 	{
-// 		free(strs[i]);
-// 		i++;
-// 	}
-// 	free(strs);
-// 	return (NULL);
-// }
 
 void	ft_lstclearp(t_listp	*lst)
 {
@@ -34,7 +20,6 @@ void	ft_lstclearp(t_listp	*lst)
 	{
 		tmp = lst->next;
 		free(lst->content);
-		// free_split(lst->content2);
 		free(lst);
 		lst = tmp;
 	}

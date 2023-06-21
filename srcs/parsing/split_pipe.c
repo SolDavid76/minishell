@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 07:21:09 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/15 10:51:37 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:11:13 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_listp	*split_pipe(char	*str)
 	if (end_pipe(str) == 1 || start_pipe(str) == 1 || \
 	test_multi(str) == 1 || check_triple(str) == 1)
 	{
-		g_shell->exit_value = 2;	
+		g_shell->exit_value = 2;
 		return (print_error(), NULL);
 	}
 	split = ft_split_quote(str, "|");
@@ -41,7 +41,6 @@ t_listp	*split_pipe(char	*str)
 		i++;
 	}
 	free_split_p(split);
-	// print_list(&lst);
 	return (lst);
 }
 
@@ -95,7 +94,6 @@ t_listp	*split_redirection(t_listp **lst)
 		ft_lstclearp(*lst);
 		return (NULL);
 	}
-	// print_command(lst);
 	return (*lst);
 }
 

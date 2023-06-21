@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:40:14 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/14 15:43:51 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:51:12 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,4 @@ void	ft_dictclear(t_dict	*lst)
 		free(lst);
 		lst = tmp;
 	}
-}
-
-void	print_dict(t_dict **lst)
-{
-	t_dict	*tmp;
-	int		i;
-
-	tmp = *lst;
-	i = 0;
-	while (tmp)
-	{
-		printf("%s %s\n", tmp->key, tmp->content);
-		tmp = tmp->next;
-		i++;
-	}
-	printf("\n");
 }

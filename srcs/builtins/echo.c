@@ -6,13 +6,13 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 11:02:09 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/19 16:21:30 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:55:11 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int skip_newline(char **str)
+int	skip_newline(char **str)
 {
 	int	i;
 
@@ -21,6 +21,7 @@ int skip_newline(char **str)
 		i++;
 	return (i);
 }
+
 void	echo(char **cmd)
 {
 	int	option;
@@ -30,7 +31,6 @@ void	echo(char **cmd)
 	i = option;
 	if (option)
 		i = skip_newline(cmd);
-	
 	while (cmd[i])
 	{
 		write(1, cmd[i], ft_strlen(cmd[i]));

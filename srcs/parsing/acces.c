@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:27:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/20 18:23:59 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:03:29 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ t_listp	*substitution(t_listp **token, char **envp)
 		flag = 0;
 		while (ft_strslen(tmp->content2) > i && tmp->content2[i] && flag == 0)
 		{
-			if (tmp->content2 && check_redirection(tmp->content2[i]) == 0 && ft_strncmp(tmp->content2[i], "./", 2) != 0)
+			if (tmp->content2 && check_redirection(tmp->content2[i]) == 0 && \
+			ft_strncmp(tmp->content2[i], "./", 2) != 0)
 			{
 				tmp->content2[i] = command_sub(tmp->content2[i], envp);
 				flag = 1;
@@ -54,6 +55,5 @@ t_listp	*substitution(t_listp **token, char **envp)
 		}
 		tmp = tmp->next;
 	}
-	// printf("after substitution\n");
 	return (*token);
 }

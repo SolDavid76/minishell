@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:41:31 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/15 15:47:01 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:03:03 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,5 @@ t_listp	*expansion(t_listp **token, char **envp)
 		}
 		tmp = tmp->next;
 	}
-	// printf("after expansion\n");
 	return (*token);
 }

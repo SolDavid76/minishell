@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:01:50 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/20 18:44:02 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:10:44 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,18 @@ extern t_shell	*g_shell;
 t_listp	*parsing_aux(t_listp *bob, char *tmp, char **envp)
 {
 	add_history(tmp);
-	// printf("readline : %s\n", tmp);
 	bob = lexer2(tmp, bob);
 	if (bob != NULL)
 	{
 		bob = expansion(&bob, envp);
-		// print_command(&bob);
 	}
 	if (bob != NULL)
 	{
 		bob = remove_quote(&bob);
-		// print_command(&bob);
 	}
 	if (bob != NULL)
 	{
 		bob = substitution(&bob, envp);
-		// print_command(&bob);
-		// printf("list size %d\n", ft_lstsizep(bob));
 	}
 	return (bob);
 }

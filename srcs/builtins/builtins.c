@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:46 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 18:42:42 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:54:36 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	exec_buildin(char **cmd, int mod)
 	if (!ft_strcmp(cmd[0], "pwd"))
 		pwd();
 	if (!ft_strcmp(cmd[0], "export"))
-		export(cmd[1], g_shell->dict);
+		export(cmd + 1, g_shell->dict, 0);
 	if (!ft_strcmp(cmd[0], "unset"))
 		unset(cmd[1], g_shell->dict);
 	if (!ft_strcmp(cmd[0], "env"))
-		env(g_shell->envp);
+		env(g_shell->envp, cmd);
 	if (!ft_strcmp(cmd[0], "exit"))
 		exec_exit(cmd + 1);
 	if (mod)

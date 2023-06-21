@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:25:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/20 18:42:09 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:54:58 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,12 @@
 int		is_buildin(char *cmd);
 void	exec_buildin(char **cmd, int mod);
 void	cd(char	*path, char **cmd);
-void	env(char **envp);
+void	env(char **envp, char **cmd);
 void	echo(char **cmd);
 int		pwd(void);
-void	export(char *str, t_dict *dict);
+void	export(char **cmd, t_dict *dict, int i);
 void	unset(char *var, t_dict *dict);
 void	exec_exit(char **cmd);
-
-
-
 
 void	ft_dictadd_back(t_dict **lst, t_dict *new);
 t_dict	*ft_dictnew(char *content, char *key);
@@ -42,5 +39,8 @@ void	export_without_arg(t_dict *dict);
 
 char	*get_key(char *str);
 char	*get_content(char *str);
+
+char	*ft_strjoin_char_env(char *str, char c);
+char	*ft_strjoin_env(char *s1, char *s2);
 
 #endif
