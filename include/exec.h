@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 18:34:40 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/21 12:19:24 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	*ft_lst_free(t_list	*lst);
 int		ft_cmdslen(char ***cmds);
 void	ft_pipe_child_redirection(t_pipe *pipeline, char **cmd);
 void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp);
-void	ft_pipe_parent(t_pipe *pipeline, char **cmd);
+void	ft_pipe_parent(t_pipe *pipeline);
 void	ft_pipe(char ***cmds, char **envp);
 
 /* redirection.c */
