@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:33:30 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/23 15:03:02 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/23 18:59:54 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	handler_here_doc(int signal)
 		close(0);
 		g_shell->exit_value = 130;
 		write(2, "\n", 1);
-		here_doc_remove(g_shell->here_docs);
-		minishell();
 	}
 }
 

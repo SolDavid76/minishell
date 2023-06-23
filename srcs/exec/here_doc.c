@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:41 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 18:32:59 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/23 19:22:13 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ t_list	*here_doc_open(t_list *docs, t_list *input, char *eof)
 		fd = open(str, O_CREAT + O_EXCL + O_RDWR, 0666);
 	}
 	ft_lstadd_back(&docs, ft_lstnew(str));
-	return (here_doc_write(docs, input, eof, fd));
+	if (g_shell->exit_value == 0)
+		return (here_doc_write(docs, input, eof, fd));
+	return (docs);
 }
 
 t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
@@ -77,16 +79,15 @@ t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 	t_list	*input;
 	int		i;
 
-	i = 0;
-	input = NULL;
-	ft_lstadd_back(&input, ft_lstnew(readline("heredoc>")));
-	while (ft_strcmp(ft_lstlast(input)->content, cmd[x + 1])
-		&& ft_lstlast(input)->content)
+	i = -1;
+	input = ft_lstnew(NULL);
+	while (i == -1 || (ft_strcmp(ft_lstlast(input)->content, cmd[x + 1])
+			&& ft_lstlast(input)->content && g_shell->exit_value == 0))
 	{
-		ft_lstadd_back(&input, ft_lstnew(readline("heredoc>")));
+		ft_lstadd_back(&input, ft_lstnew(readline("heredoc> ")));
 		i++;
 	}
-	if (!ft_lstlast(input)->content)
+	if (!ft_lstlast(input)->content && g_shell->exit_value == 0)
 	{
 		write(2, "warning : here-document at line ", 33);
 		ft_putnbr_fd(2, i);

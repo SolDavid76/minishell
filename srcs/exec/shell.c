@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:49 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 18:29:01 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/23 18:56:20 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_print_var(char **envp, char *key, int fd)
 	i = 0;
 	res = NULL;
 	if (key[0] == '?')
-		res = ft_itoa(g_shell->exit_value);
+		res = ft_itoa(g_shell->old_exit_value);
 	while (envp[i] && !res)
 	{
 		j = 0;
