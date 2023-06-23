@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:15:34 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/21 14:49:50 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:08:44 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	cd_aux(t_dict *test, char tmp2[PATH_MAX])
 {
 	char	tmp[PATH_MAX];
 
-	getcwd(tmp2, sizeof(tmp));
 	if (check_dict("OLDPWD") == 1)
 	{
 		while (strcmp(test->key, "OLDPWD") != 0)
@@ -89,7 +88,7 @@ void	cd(char *path, char **cmd)
 	if (chdir(path) == 0)
 		cd_aux(test, tmp2);
 	else
-	{	
+	{
 		perror("cd: ");
 		g_shell->exit_value = 1;
 	}

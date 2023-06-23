@@ -44,10 +44,6 @@ SRC_BUI	=		cd.c\
 				env.c\
 				exit.c\
 				pwd.c\
-				
-
-
-
 
 SRCS_UTI_DIR	=	srcs/
 
@@ -60,7 +56,6 @@ SRCS =$(addprefix $(SRCS_DIR), $(SRC))\
 	$(addprefix $(SRCS_UTI_DIR), $(SRC_UTI))\
 	$(addprefix $(SRCS_BUI_DIR), $(SRC_BUI))\
 
-
 OBJS_DIR	=	objs/
 
 OBJ 		= $(SRC:.c=.o)\
@@ -68,22 +63,19 @@ OBJ 		= $(SRC:.c=.o)\
 				$(SRC_UTI:.c=.o)\
 				$(SRC_BUI:.c=.o)\
 
-
-
 OBJS 		= $(addprefix $(OBJS_DIR), $(OBJ))
 
 NAME 		= 	minishell
 
 CC			= 	gcc
 
-FLAGS		= 	-Wall -Wextra -Werror -g
+FLAGS		= 	-Wall -Wextra -Werror
 
 INCS 		= 	-I ./include/
 
 READLINE	= -L /usr/local/lib -I /usr/local/include -lreadline
 
 RM = rm -f
-
 
 all : ${OBJS_DIR} ${NAME}
 
@@ -101,7 +93,6 @@ $(OBJS_DIR)%.o: $(SRCS_BUI_DIR)%.c
 
 $(OBJS_DIR):
 	mkdir $(OBJS_DIR)
-
 
 ${NAME}: ${OBJS}
 		${CC} ${FLAGS} ${OBJS} -o $(NAME) ${READLINE}
