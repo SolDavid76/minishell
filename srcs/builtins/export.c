@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:53:55 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/23 19:36:12 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:43:35 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	export(char **cmd, t_dict *dict, int i)
 		ft_dictadd_back(&dict, \
 		ft_dictnew(get_content(cmd[0]), get_key(cmd[0])));
 		g_shell->dict = dict;
-		return ;
 	}	
 	if (!cmd[0])
 	{

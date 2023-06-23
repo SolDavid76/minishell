@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:57:24 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/23 14:50:35 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:46:42 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_exit(char **cmd)
 {
 	write (1, "exit\n", 6);
 	if (!cmd[0])
-		return (0);
+		ft_main_exit(g_shell->old_exit_value);
 	if (is_number(cmd[0]) == 1)
 		return (write(2, "exit numeric argument required\n", 32), "a");
 	if (ft_strslen(cmd) > 1)
