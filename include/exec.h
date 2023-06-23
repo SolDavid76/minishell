@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/21 12:19:24 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/23 14:36:16 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_print_var(char **envp, char *key, int fd);
 
 /* signals.c */
 void	handler(int signal);
+void	handler_here_doc(int signal);
 void	status_update(int status);
 
 /* exec.c */
