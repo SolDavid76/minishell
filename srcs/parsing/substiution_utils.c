@@ -6,21 +6,11 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:58:29 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/16 10:23:21 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:44:51 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// int	ft_strcmp(char *s1, char *s2)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s1[i] != 0 && s2[i] != 0 && s1[i] == s2[i])
-// 		i++;
-// 	return (s1[i] - s2[i]);
-// }
 
 char	**get_path_line(char **env)
 {

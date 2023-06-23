@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 10:41:31 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/21 12:03:03 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/23 19:32:28 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ int	new_expand_flag(int flag, char content)
 	return (flag);
 }
 
+int	dollar_test(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i + 1] && (str[i + 1] != 0 && (str[i + 1] != '$')))
+		return (0);
+	return (1);
+}
+
 char	*new_expand_aux(char *content, char *res, int flag, char **envp)
 {
 	int		i;
@@ -36,7 +46,7 @@ char	*new_expand_aux(char *content, char *res, int flag, char **envp)
 	{
 		if (content[i] == '$')
 		{
-			if (flag != 1)
+			if (flag != 1 && dollar_test(content + i) == 0)
 			{
 				tmp = check_variable(content + i + 1, envp);
 				res = ft_strjoin(res, tmp);
@@ -48,7 +58,7 @@ char	*new_expand_aux(char *content, char *res, int flag, char **envp)
 			}
 		}
 		flag = new_expand_flag(flag, content[i]);
-		if (content[i] && (content[i] != '$' || flag == 1))
+		if (content[i] && (flag == 1 || dollar_test(content + i) == 1))
 			res = ft_strjoin_char(res, content[i++]);
 	}
 	return (res);

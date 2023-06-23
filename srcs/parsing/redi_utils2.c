@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:30:54 by ennollet          #+#    #+#             */
-/*   Updated: 2023/05/26 18:40:05 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:44:36 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_word2(char **str)
 	count = 0;
 	while (str[i])
 	{
-		if (strcmp(str[i], " ") != 0)
+		if (ft_strcmp(str[i], " ") != 0)
 			count++;
 		i++;
 	}
@@ -43,7 +43,7 @@ char	**realoc_split(char **s)
 		return (NULL);
 	while (s[j])
 	{
-		if (strcmp(s[j], " ") != 0)
+		if (ft_strcmp(s[j], " ") != 0)
 			tab[i++] = s[j];
 		else
 			free(s[j]);
