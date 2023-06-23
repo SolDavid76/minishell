@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:37 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/21 12:38:54 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/23 14:29:24 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	ft_pipe_child_redirection(t_pipe *pipeline, char **cmd)
 
 void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp)
 {
+	free(pipeline->pid);
+	close(g_shell->savedin);
+	close(g_shell->savedout);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	free(pipeline->pid);
 	ft_pipe_child_redirection(pipeline, cmd);
 	if (g_shell->exit_value != 0)
 		ft_main_exit(g_shell->exit_value);

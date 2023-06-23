@@ -23,6 +23,7 @@ void	ft_shell_init(char **envp)
 		g_shell->here_docs = ft_lst_free(g_shell->here_docs);
 		dup2(g_shell->savedin, 0);
 		dup2(g_shell->savedout, 1);
+		rl_redisplay();
 	}
 	else
 	{
@@ -78,6 +79,7 @@ void	minishell(void)
 	t_listp	*lstp;
 	char	*input;
 
+	dup2(g_shell->savedin, 0);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 	input = readline("minishell> ");

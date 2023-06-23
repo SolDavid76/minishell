@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 15:33:30 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/20 12:54:23 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/23 18:59:54 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,21 @@ void	handler(int signal)
 {
 	if (signal == SIGINT)
 	{
-		write(2, "\n", 1);
 		g_shell->exit_value = 130;
+		write(2, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+	}
+}
+
+void	handler_here_doc(int signal)
+{
+	if (signal == SIGINT)
+	{
+		close(0);
+		g_shell->exit_value = 130;
+		write(2, "\n", 1);
 	}
 }
 
