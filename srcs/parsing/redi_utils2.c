@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 18:30:54 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/23 17:44:36 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:55:56 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**realoc_split(char **s)
 		return (NULL);
 	while (s[j])
 	{
-		if (ft_strcmp(s[j], " ") != 0)
+		if (is_sep(s[j][0], " \f\v\n\r\t") == 0)
 			tab[i++] = s[j];
 		else
 			free(s[j]);

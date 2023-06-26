@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:53:55 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/23 19:43:35 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/26 13:28:05 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ void	export_without_arg(t_dict *dict)
 {
 	t_dict	*tmp;
 
-	tmp = dict;
-	while (tmp->next != NULL)
+	if (dict)
 	{
-		printf("export %s=\"%s\"\n", tmp->key, tmp->content);
-		tmp = tmp->next;
+		tmp = dict;
+		while (tmp->next != NULL)
+		{
+			printf("export %s=\"%s\"\n", tmp->key, tmp->content);
+			tmp = tmp->next;
+		}
 	}
 }
 
@@ -90,16 +93,16 @@ int	export_test(char **cmd)
 
 void	export(char **cmd, t_dict *dict, int i)
 {
+	if (!cmd[0])
+	{
+		export_without_arg(dict);
+		return ;
+	}
 	if (!dict)
 	{
 		ft_dictadd_back(&dict, \
 		ft_dictnew(get_content(cmd[0]), get_key(cmd[0])));
 		g_shell->dict = dict;
-	}	
-	if (!cmd[0])
-	{
-		export_without_arg(dict);
-		return ;
 	}
 	while (*cmd)
 	{

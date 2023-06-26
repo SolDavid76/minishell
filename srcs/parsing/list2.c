@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:01:43 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/21 12:10:24 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/26 13:11:14 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@ void	ft_lstclearp(t_listp	*lst)
 	while (lst)
 	{
 		tmp = lst->next;
+		free(lst->content);
+		free(lst);
+		lst = tmp;
+	}
+}
+
+void	ft_lstfullclearp(t_listp	*lst)
+{
+	t_listp	*tmp;
+
+	while (lst)
+	{
+		tmp = lst->next;
+		free(lst->content2);
 		free(lst->content);
 		free(lst);
 		lst = tmp;

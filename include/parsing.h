@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 11:31:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/21 14:51:41 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/26 13:11:54 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_listp	*ft_lstnewp(char *content, int len);
 int		is_empty(t_listp *list);
 void	add_tailp(t_listp *list, t_listp *new);
 void	ft_lstclearp(t_listp *lst);
+void	ft_lstfullclearp(t_listp	*lst);
 void	ft_lstadd_backp(t_listp **lst, t_listp *new);
 int		ft_lstsizep(t_listp *lst);
 
