@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 07:21:09 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/21 12:11:13 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:45:03 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ t_listp	*split_redirection(t_listp **lst)
 	tmp = *lst;
 	while (tmp)
 	{
-		tmp->content = ft_strtrim(tmp->content, " ");
-		tmp->content2 = split_redirect(tmp->content, "<> ");
+		tmp->content = ft_strtrim(tmp->content, "\f\v\n\r\t ");
+		tmp->content2 = split_redirect(tmp->content, "<> \f\v\n\r\t");
 		tmp->content2 = realoc_split2(tmp->content2);
 		tmp->content2 = realoc_split(tmp->content2);
 		if (flag == 0)

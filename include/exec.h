@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:22:43 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/23 14:36:16 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/26 18:35:29 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		ft_redirection_aux(char **cmd, int i);
 void	ft_redirection(char **cmd);
 
 /* here_doc.c */
+void	here_doc_error(char *eof, int lines);
 void	*here_doc_remove(t_list *docs);
 t_list	*here_doc_write(t_list *docs, t_list *input, char *eof, int fd);
 t_list	*here_doc_open(t_list *docs, t_list *input, char *eof);

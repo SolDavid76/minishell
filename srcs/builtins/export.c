@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:53:55 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/21 17:57:50 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/26 13:28:05 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,15 @@ void	export_without_arg(t_dict *dict)
 {
 	t_dict	*tmp;
 
-	tmp = dict;
-	while (tmp->next != NULL)
+	if (dict)
 	{
-		printf("export %s=\"%s\"\n", tmp->key, tmp->content);
-		tmp = tmp->next;
-	}
-}
-
-t_dict	*add_dict(t_dict *dict, char *key, char *content)
-{
-	t_dict	*tmp;
-
-	tmp = dict;
-	while (tmp->next != NULL)
-	{
-		if (strcmp(key, tmp->key) == 0)
+		tmp = dict;
+		while (tmp->next != NULL)
 		{
-			free(tmp->content);
-			tmp->content = ft_strdup(content);
-			return (dict);
+			printf("export %s=\"%s\"\n", tmp->key, tmp->content);
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
-	ft_dictadd_back(&dict, ft_dictnew(content, key));
-	return (dict);
 }
 
 void	*export_aux(char *str, t_dict *dict)
@@ -82,6 +66,31 @@ void	export_aux2(char *str, int i, t_dict *dict)
 	}
 }
 
+int	export_test(char **cmd)
+{
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 0;
+	if (cmd[i][0] >= '0' && cmd[i][0] <= '9')
+	{
+		g_shell->exit_value = 1;
+		printf("export: `%s': not a valid identifier\n", *cmd);
+		flag = 1;
+	}
+	while ((*cmd)[i] && (*cmd)[i] != '=' && flag != 1)
+	{
+		if (!(is_valid_variable((*cmd)[i++])))
+		{
+			g_shell->exit_value = 2;
+			printf("export: `%s': not a valid identifier\n", *cmd);
+			flag = 1;
+		}
+	}
+	return (flag);
+}
+
 void	export(char **cmd, t_dict *dict, int i)
 {
 	if (!cmd[0])
@@ -89,23 +98,16 @@ void	export(char **cmd, t_dict *dict, int i)
 		export_without_arg(dict);
 		return ;
 	}
+	if (!dict)
+	{
+		ft_dictadd_back(&dict, \
+		ft_dictnew(get_content(cmd[0]), get_key(cmd[0])));
+		g_shell->dict = dict;
+	}
 	while (*cmd)
 	{
-		i = 0;
-		if (cmd[i][0] >= '0' && cmd[i][0] <= '9')
-		{
-			g_shell->exit_value = 1;
-			printf("export: `%s': not a valid identifier\n", *cmd);
-		}
-		while ((*cmd)[i] && (*cmd)[i] != '=')
-		{
-			if (!(is_valid_variable((*cmd)[i++])))
-			{
-				g_shell->exit_value = 2;
-				printf("export: `%s': not a valid identifier\n", *cmd);
-			}
-		}
-		export_aux2(*cmd, i, dict);
+		if (export_test(cmd) == 0)
+			export_aux2(*cmd, i, dict);
 		cmd++;
 	}
 }

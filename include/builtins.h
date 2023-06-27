@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:25:19 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/21 17:54:58 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:53:52 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	env(char **envp, char **cmd);
 void	echo(char **cmd);
 int		pwd(void);
 void	export(char **cmd, t_dict *dict, int i);
-void	unset(char *var, t_dict *dict);
+void	unset(char **cmd, t_dict *dict);
 void	exec_exit(char **cmd);
 
 void	ft_dictadd_back(t_dict **lst, t_dict *new);

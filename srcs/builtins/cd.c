@@ -6,7 +6,7 @@
 /*   By: ennollet <ennollet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 10:15:34 by ennollet          #+#    #+#             */
-/*   Updated: 2023/06/23 11:08:44 by ennollet         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:43:22 by ennollet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	cd_aux(t_dict *test, char tmp2[PATH_MAX])
 
 	if (check_dict("OLDPWD") == 1)
 	{
-		while (strcmp(test->key, "OLDPWD") != 0)
+		while (ft_strcmp(test->key, "OLDPWD") != 0)
 			test = test->next;
 		free(test->content);
 		test->content = ft_strdup(tmp2);
@@ -44,7 +44,7 @@ void	cd_aux(t_dict *test, char tmp2[PATH_MAX])
 	if (check_dict("PWD") == 1)
 	{
 		test = g_shell->dict;
-		while (strcmp(test->key, "PWD") != 0)
+		while (ft_strcmp(test->key, "PWD") != 0)
 			test = test->next;
 		getcwd(tmp, sizeof(tmp));
 		free(test->content);
@@ -69,7 +69,7 @@ int	cd_aux2(char **cmd, char **path)
 	}
 	else if (!(*path))
 	{
-		write (2, "bash: cd: HOME not set\n", 24);
+		write (2, "cd: HOME not set\n", 18);
 		g_shell->exit_value = 1;
 		return (1);
 	}

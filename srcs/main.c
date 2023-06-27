@@ -85,8 +85,11 @@ void	minishell(void)
 	input = readline("minishell> ");
 	lstp = parsing(input, g_shell->envp);
 	free(input);
-	if (!lstp)
+	if (!lstp || !lstp->content2 || !lstp->content2[0])
+	{
+		ft_lstfullclearp(lstp);
 		return ;
+	}
 	g_shell->cmds = big_join(lstp);
 	ft_lstclearp(lstp);
 	ft_exec(g_shell->cmds, g_shell->envp);

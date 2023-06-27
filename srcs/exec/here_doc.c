@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:41 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/23 19:22:13 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/27 15:44:25 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern t_shell	*g_shell;
 
 void	*here_doc_remove(t_list *docs)
 {
-	while (docs)
+	while (docs && docs->content)
 	{
 		unlink(docs->content);
 		docs = docs->next;
@@ -61,14 +61,15 @@ t_list	*here_doc_open(t_list *docs, t_list *input, char *eof)
 	i = 0;
 	fd = -1;
 	str = NULL;
-	while (fd == -1)
+	while (fd == -1 && g_shell->exit_value == 0)
 	{
 		if (str)
 			free(str);
 		str = ft_strjoin(ft_strdup(".here_doc"), ft_itoa(i++));
 		fd = open(str, O_CREAT + O_EXCL + O_RDWR, 0666);
+		if (fd != -1)
+			ft_lstadd_back(&docs, ft_lstnew(str));
 	}
-	ft_lstadd_back(&docs, ft_lstnew(str));
 	if (g_shell->exit_value == 0)
 		return (here_doc_write(docs, input, eof, fd));
 	return (docs);
@@ -81,24 +82,20 @@ t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 
 	i = -1;
 	input = ft_lstnew(NULL);
-	while (i == -1 || (ft_strcmp(ft_lstlast(input)->content, cmd[x + 1])
-			&& ft_lstlast(input)->content && g_shell->exit_value == 0))
+	while (g_shell->exit_value == 0 && (i == -1 || (ft_lstlast(input)->content && ft_strcmp(ft_lstlast(input)->content, cmd[x + 1]))))
 	{
 		ft_lstadd_back(&input, ft_lstnew(readline("heredoc> ")));
 		i++;
 	}
 	if (!ft_lstlast(input)->content && g_shell->exit_value == 0)
-	{
-		write(2, "warning : here-document at line ", 33);
-		ft_putnbr_fd(2, i);
-		write(2, " delimited by end-of-file (wanted `", 36);
-		write(2, cmd[x + 1], ft_strlen(cmd[x + 1]));
-		write(2, "')\n", 3);
-	}
+		here_doc_error(cmd[x + 1], i);
 	docs = here_doc_open(docs, input, cmd[x + 1]);
 	ft_lst_free(input);
-	free(cmd[x + 1]);
-	cmd[x + 1] = ft_strdup(ft_lstlast(docs)->content);
+	if (docs && docs->content)
+	{
+		free(cmd[x + 1]);
+		cmd[x + 1] = ft_strdup(ft_lstlast(docs)->content);
+	}
 	return (docs);
 }
 

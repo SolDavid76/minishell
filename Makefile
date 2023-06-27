@@ -26,6 +26,7 @@ SRC_EX	=		free.c\
 				ft_itoa.c\
 				ft_pipe.c\
 				here_doc.c\
+				here_doc_utils.c\
 				lst.c\
 				redirection.c\
 				shell.c\
