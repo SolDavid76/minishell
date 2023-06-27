@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:41 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/27 15:44:25 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/27 17:18:46 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ t_list	*here_doc_aux(t_list *docs, char **cmd, int x)
 
 	i = -1;
 	input = ft_lstnew(NULL);
-	while (g_shell->exit_value == 0 && (i == -1 || (ft_lstlast(input)->content && ft_strcmp(ft_lstlast(input)->content, cmd[x + 1]))))
+	while (g_shell->exit_value == 0 && (i == -1 || (ft_lstlast(input)->content
+				&& ft_strcmp(ft_lstlast(input)->content, cmd[x + 1]))))
 	{
 		ft_lstadd_back(&input, ft_lstnew(readline("heredoc> ")));
 		i++;
