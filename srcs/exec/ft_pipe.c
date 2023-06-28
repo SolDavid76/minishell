@@ -6,7 +6,7 @@
 /*   By: djanusz <djanusz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 10:23:37 by djanusz           #+#    #+#             */
-/*   Updated: 2023/06/23 14:29:24 by djanusz          ###   ########.fr       */
+/*   Updated: 2023/06/28 14:56:45 by djanusz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	ft_pipe_child(t_pipe *pipeline, char **cmd, char **envp)
 		ft_main_exit(g_shell->exit_value);
 	if (is_buildin(cmd[0]))
 		exec_buildin(cmd, 1);
-	if (access(cmd[0], X_OK) == 0)
+	if (cmd[0] && access(cmd[0], X_OK) == 0)
 		execve(cmd[0], cmd, envp);
-	else
+	else if (cmd[0])
 	{
 		write(2, cmd[0], ft_strlen(cmd[0]));
 		write(2, ": command not found\n", 20);
